@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://c8nusbwukbtai"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_lhvak"]
+[ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="2_kd5qd"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_w4jx1"]
+[ext_resource type="Script" path="res://player/states/fall.gd" id="3_vaam4"]
+[ext_resource type="Script" path="res://player/states/hook.gd" id="4_1vtdg"]
+[ext_resource type="Script" path="res://player/states/launch.gd" id="5_rk14n"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsa7s"]
+bounce = 1.0
+
+[sub_resource type="Curve" id="Curve_ndvdx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f2qbe"]
+curve = SubResource("Curve_ndvdx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cjb3d"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_f2qbe")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hjgmm"]
+radius = 6.0
+
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("shape", "fill")]
+collision_layer = 6
+physics_material_override = SubResource("PhysicsMaterial_rsa7s")
+gravity_scale = 0.5
+script = ExtResource("1_lhvak")
+shape = NodePath("Shape")
+fill = NodePath("Shape/Fill")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_w4jx1")
+initial_state = NodePath("Fall")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("3_vaam4")
+
+[node name="Hook" type="Node" parent="StateMachine"]
+script = ExtResource("4_1vtdg")
+
+[node name="Launch" type="Node" parent="StateMachine"]
+script = ExtResource("5_rk14n")
+
+[node name="Trail" type="GPUParticles2D" parent="."]
+amount = 75
+process_material = SubResource("ParticleProcessMaterial_cjb3d")
+texture = ExtResource("2_kd5qd")
+lifetime = 2.0
+explosiveness = 0.1
+randomness = 1.0
+
+[node name="Shape" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-6, 0, 0, -6, 6, 0, 0, 6)
+
+[node name="Fill" type="Polygon2D" parent="Shape"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-4, 0, 0, -4, 4, 0, 0, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hjgmm")
+
+[node name="HookCast" type="RayCast2D" parent="."]
+target_position = Vector2(256, 0)

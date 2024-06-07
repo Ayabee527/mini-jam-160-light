@@ -1,17 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://d06lpgmwoofe3"]
+[gd_scene load_steps=5 format=3 uid="uid://d06lpgmwoofe3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sass7"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
+[ext_resource type="PackedScene" uid="uid://c8nusbwukbtai" path="res://player/player.tscn" id="1_lis5i"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6yc6q"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3epfo"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b0nra"]
+normal = Vector2(-1, 0)
 
 [node name="Main" type="Node2D"]
 
-[node name="BG" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(256, 256)
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_sass7")
+[node name="Player" parent="." instance=ExtResource("1_lis5i")]
+position = Vector2(128, 0)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="WallLeft" type="StaticBody2D" parent="Walls"]
+position = Vector2(2, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallLeft"]
+shape = SubResource("WorldBoundaryShape2D_6yc6q")
+
+[node name="WallUp" type="StaticBody2D" parent="Walls"]
+position = Vector2(128, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallUp"]
+shape = SubResource("WorldBoundaryShape2D_3epfo")
+disabled = true
+
+[node name="WallRight" type="StaticBody2D" parent="Walls"]
+position = Vector2(254, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallRight"]
+shape = SubResource("WorldBoundaryShape2D_b0nra")

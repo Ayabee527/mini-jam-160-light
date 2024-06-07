@@ -1,0 +1,57 @@
+{
+	"categories": [
+		{
+			"uuid": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"title": "Task",
+			"color": "569eff"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "9abb0949-8725-4ee3-b55c-6166d16d8f4c",
+			"title": "Todo",
+			"tasks": []
+		},
+		{
+			"uuid": "4ee7b101-230c-4334-8806-9bc4f463b0f7",
+			"title": "Doing",
+			"tasks": [
+				"3ccfd4f5-be7b-4cc4-9350-83137a19602f"
+			]
+		},
+		{
+			"uuid": "24b3160e-ae78-4f72-b617-c55485ed9a6c",
+			"title": "Done",
+			"tasks": []
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "3ccfd4f5-be7b-4cc4-9350-83137a19602f",
+			"title": "Snake Player",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "ede6d08a-2718-4d0b-9432-adbc56b0d45b",
+			"title": "New task",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"9abb0949-8725-4ee3-b55c-6166d16d8f4c"
+			],
+			[
+				"4ee7b101-230c-4334-8806-9bc4f463b0f7"
+			],
+			[
+				"24b3160e-ae78-4f72-b617-c55485ed9a6c"
+			]
+		]
+	}
+}
