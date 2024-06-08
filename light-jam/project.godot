@@ -40,6 +40,8 @@ folder_colors={
 "res://addons/": "gray",
 "res://assets/": "purple",
 "res://components/": "orange",
+"res://enemies/": "red",
+"res://light_beam/": "red",
 "res://player/": "teal",
 "res://spotlight/": "teal"
 }

@@ -17,6 +17,7 @@ func enter(msg:={}) -> void:
 		player.gravity_scale = 0
 		player.latch_sound.play()
 		player.hook_sound.play()
+		MainCam.shake(2)
 	else:
 		state_machine.transition_to("Fall")
 
@@ -48,6 +49,7 @@ func exit() -> void:
 		)
 		launch_particles.restart()
 		player.launch_sound.play()
+		MainCam.shake(1, 30, 2)
 
 
 func _on_launch_detect_area_entered(area: Area2D) -> void:

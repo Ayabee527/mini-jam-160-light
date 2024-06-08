@@ -9,6 +9,7 @@ extends RigidBody2D
 @export var latch_sound: AudioStreamPlayer
 @export var launch_sound: AudioStreamPlayer
 @export var buzz_sound: AudioStreamPlayer
+@export var bounce_sound: AudioStreamPlayer
 
 var lights: Array[LightBeam]
 
@@ -54,3 +55,8 @@ func _on_light_detect_area_exited(area: Area2D) -> void:
 	if lights.size() <= 0:
 		burn_particles.emitting = false
 		buzz_sound.stop()
+
+
+func _on_body_entered(body: Node) -> void:
+	MainCam.shake(1, 5, 15)
+	bounce_sound.play()
