@@ -134,6 +134,7 @@ hook_detect = NodePath("../../GrappleHolder/HookDetect")
 
 [node name="Hook" type="Node" parent="StateMachine" node_paths=PackedStringArray("grapple_line", "launch_window", "launch_particles")]
 script = ExtResource("4_1vtdg")
+grapple_speed = 1000.0
 grapple_line = NodePath("../../GrappleLine")
 launch_window = NodePath("LaunchWindow")
 launch_particles = NodePath("../../LaunchParticles")
