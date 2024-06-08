@@ -46,8 +46,8 @@ initial_velocity_max = 150.0
 gravity = Vector3(0, 0, 0)
 damping_min = 10.0
 damping_max = 50.0
-scale_min = 0.1
-scale_max = 0.15
+scale_min = 0.05
+scale_max = 0.1
 scale_curve = SubResource("CurveTexture_gc56k")
 
 [sub_resource type="Curve" id="Curve_ucy7y"]

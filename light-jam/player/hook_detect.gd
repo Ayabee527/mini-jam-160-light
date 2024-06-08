@@ -14,6 +14,8 @@ func _process(delta: float) -> void:
 	global_position = get_global_mouse_position()
 	grapple_highlight.global_rotation_degrees += 180.0 * delta
 	
+	if targeted_grapple != null:
+		grapple_highlight.global_position = targeted_grapple.global_position
 	grapple_highlight.scale = Vector2.ONE * ((0.25 * sin(sine)) + 1.0)
 	
 	sine += 5.0 * delta
@@ -28,7 +30,6 @@ func update_highlight() -> void:
 			closest_dist = dist
 			closest = grapple
 	
-	grapple_highlight.global_position = closest.global_position
 	targeted_grapple = closest
 
 func _on_area_entered(area: Area2D) -> void:

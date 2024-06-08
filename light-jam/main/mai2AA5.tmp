@@ -38,6 +38,9 @@ position = Vector2(128, 256)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/BG/WallDown"]
 shape = SubResource("WorldBoundaryShape2D_xs64a")
 
+[node name="Player" parent="." instance=ExtResource("1_lis5i")]
+position = Vector2(128, 248)
+
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="WallLeft" type="StaticBody2D" parent="Walls"]
@@ -51,9 +54,6 @@ position = Vector2(254, 128)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallRight"]
 shape = SubResource("WorldBoundaryShape2D_b0nra")
-
-[node name="Player" parent="." instance=ExtResource("1_lis5i")]
-position = Vector2(128, 248)
 
 [node name="Grapple" type="Polygon2D" parent="."]
 position = Vector2(128, 128)
@@ -88,30 +88,5 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple3/Area2D"]
 shape = SubResource("CircleShape2D_hj8l0")
 
-[node name="Grapple4" type="Polygon2D" parent="."]
-position = Vector2(128, -448)
-polygon = PackedVector2Array(-8, 0, 0, -8, 8, 0, 0, 8)
-
-[node name="Area2D" type="Area2D" parent="Grapple4"]
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple4/Area2D"]
-shape = SubResource("CircleShape2D_hj8l0")
-
-[node name="Grapple5" type="Polygon2D" parent="."]
-position = Vector2(128, -704)
-polygon = PackedVector2Array(-8, 0, 0, -8, 8, 0, 0, 8)
-
-[node name="Area2D" type="Area2D" parent="Grapple5"]
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple5/Area2D"]
-shape = SubResource("CircleShape2D_hj8l0")
-
 [node name="LightBeam" parent="." instance=ExtResource("2_1av4k")]
-position = Vector2(256, -128)
-rotation = 4.27606
-length = 726.0
-end_width = 128.0
+position = Vector2(-8, 83)
