@@ -1,36 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://csyt4jfrvb8nw"]
+[gd_scene load_steps=2 format=3 uid="uid://csyt4jfrvb8nw"]
 
 [ext_resource type="Script" path="res://autoloads/MainCam.gd" id="1_ubem2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4whbt"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 2
-border_width_right = 2
-border_color = Color(1, 1, 1, 1)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6yyqq"]
 
 [node name="MainCam" type="Camera2D"]
 ignore_rotation = false
 limit_left = 0
 limit_right = 256
-position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 rotation_smoothing_enabled = true
 drag_vertical_enabled = true
 drag_bottom_margin = 1.0
 script = ExtResource("1_ubem2")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="BG" type="PanelContainer" parent="CanvasLayer"]
-custom_minimum_size = Vector2(256, 256)
-offset_right = 256.0
-offset_bottom = 256.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4whbt")
-
-[node name="WallDown" type="StaticBody2D" parent="CanvasLayer"]
-position = Vector2(128, 128)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/WallDown"]
-shape = SubResource("WorldBoundaryShape2D_6yyqq")

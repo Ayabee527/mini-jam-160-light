@@ -72,8 +72,8 @@ move_down={
 2d_physics/layer_1="world"
 2d_physics/layer_2="world_colliders"
 2d_physics/layer_3="player"
-2d_physics/layer_4="ouchies"
-2d_physics/layer_5="goodies"
+2d_physics/layer_4="grapples"
+2d_physics/layer_5="ouchies"
 
 [rendering]
 

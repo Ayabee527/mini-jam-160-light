@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8nusbwukbtai"]
+[gd_scene load_steps=15 format=3 uid="uid://c8nusbwukbtai"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_lhvak"]
 [ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="2_kd5qd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://player/states/fall.gd" id="3_vaam4"]
 [ext_resource type="Script" path="res://player/states/hook.gd" id="4_1vtdg"]
 [ext_resource type="Script" path="res://player/states/launch.gd" id="5_rk14n"]
+[ext_resource type="Script" path="res://player/hook_detect.gd" id="7_2uq0f"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsa7s"]
 bounce = 1.0
@@ -26,6 +27,12 @@ scale_curve = SubResource("CurveTexture_f2qbe")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hjgmm"]
 radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bv8kr"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2unb"]
+radius = 8.0
 
 [node name="Player" type="RigidBody2D" node_paths=PackedStringArray("shape", "fill")]
 collision_layer = 6
@@ -66,5 +73,29 @@ polygon = PackedVector2Array(-4, 0, 0, -4, 4, 0, 0, 4)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hjgmm")
 
-[node name="HookCast" type="RayCast2D" parent="."]
-target_position = Vector2(256, 0)
+[node name="Node" type="Node" parent="."]
+
+[node name="GrappleHighlight" type="Polygon2D" parent="Node"]
+visible = false
+color = Color(1, 1, 1, 0.25098)
+polygon = PackedVector2Array(-24, 0, 0, -24, 24, 0, 0, 24)
+
+[node name="HookDetect" type="Area2D" parent="Node" node_paths=PackedStringArray("player", "grapple_highlight")]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("7_2uq0f")
+player = NodePath("../..")
+grapple_highlight = NodePath("../GrappleHighlight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/HookDetect"]
+shape = SubResource("CircleShape2D_bv8kr")
+
+[node name="LaunchDetect" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaunchDetect"]
+shape = SubResource("CircleShape2D_e2unb")
+
+[connection signal="area_entered" from="Node/HookDetect" to="Node/HookDetect" method="_on_area_entered"]
+[connection signal="area_exited" from="Node/HookDetect" to="Node/HookDetect" method="_on_area_exited"]
