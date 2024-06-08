@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c8nusbwukbtai"]
+[gd_scene load_steps=34 format=3 uid="uid://c8nusbwukbtai"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_lhvak"]
 [ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="2_kd5qd"]
@@ -28,6 +28,25 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.25
 scale_curve = SubResource("CurveTexture_f2qbe")
+
+[sub_resource type="Curve" id="Curve_vi133"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ewlb0"]
+curve = SubResource("Curve_vi133")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0iuas"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 75.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+damping_min = 10.0
+damping_max = 100.0
+scale_min = 0.1
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_ewlb0")
 
 [sub_resource type="Curve" id="Curve_eog8b"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -143,23 +162,33 @@ initial_state = NodePath("Fall")
 script = ExtResource("3_vaam4")
 hook_detect = NodePath("../../GrappleHolder/HookDetect")
 
-[node name="Hook" type="Node" parent="StateMachine" node_paths=PackedStringArray("grapple_line", "launch_window", "launch_particles")]
+[node name="Hook" type="Node" parent="StateMachine" node_paths=PackedStringArray("grapple_line", "launch_window", "launch_particles", "launch_celebrate")]
 script = ExtResource("4_1vtdg")
 grapple_speed = 1000.0
 grapple_line = NodePath("../../GrappleLine")
 launch_window = NodePath("LaunchWindow")
 launch_particles = NodePath("../../LaunchParticles")
+launch_celebrate = NodePath("../../LaunchCelebrate")
 
 [node name="LaunchWindow" type="Timer" parent="StateMachine/Hook"]
 wait_time = 0.5
 one_shot = true
 
 [node name="Trail" type="GPUParticles2D" parent="."]
-amount = 75
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_cjb3d")
 texture = ExtResource("2_kd5qd")
 lifetime = 2.0
 explosiveness = 0.1
+randomness = 1.0
+
+[node name="LaunchCelebrate" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_0iuas")
+texture = ExtResource("2_kd5qd")
+one_shot = true
+explosiveness = 1.0
 randomness = 1.0
 
 [node name="Burn" type="GPUParticles2D" parent="."]

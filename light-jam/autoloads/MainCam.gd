@@ -49,3 +49,8 @@ func get_noise_offset(delta: float) -> Vector2:
 		noise.get_noise_2d(1, noise_i) * shake_strength,
 		noise.get_noise_2d(100, noise_i) * shake_strength,
 	)
+
+func hitstop(time_scale: float, duration : float) -> void:
+	Engine.time_scale = time_scale
+	await get_tree().create_timer(duration * time_scale, false).timeout
+	Engine.time_scale = 1

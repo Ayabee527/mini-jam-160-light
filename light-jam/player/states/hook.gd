@@ -5,6 +5,7 @@ extends PlayerState
 @export var grapple_line: Line2D
 @export var launch_window: Timer
 @export var launch_particles: GPUParticles2D
+@export var launch_celebrate: GPUParticles2D
 
 var previous_vel: Vector2
 var grapple_point: Area2D
@@ -48,8 +49,10 @@ func exit() -> void:
 			+ ( player.linear_velocity.normalized() * previous_vel.length() * 0.25 )
 		)
 		launch_particles.restart()
+		launch_celebrate.restart()
 		player.launch_sound.play()
 		MainCam.shake(1, 30, 2)
+		MainCam.hitstop(0.25, 0.5)
 
 
 func _on_launch_detect_area_entered(area: Area2D) -> void:
