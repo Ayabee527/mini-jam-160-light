@@ -22,5 +22,5 @@ func _on_smash_detect_area_entered(area: Area2D) -> void:
 		smashed.emit()
 		dead = true
 		MainCam.shake(15, 10, 10)
-		MainCam.hitstop(0.2, 0.75)
+		MainCam.hitstop(0.2, 0.5)
 		die_sound.play()

@@ -11,7 +11,6 @@
 			"uuid": "9abb0949-8725-4ee3-b55c-6166d16d8f4c",
 			"title": "Todo",
 			"tasks": [
-				"ffb3e5c9-0047-43e1-8021-f3b3b4d497f6",
 				"372543cb-9d5c-4030-bff3-6d5c88f980de",
 				"f2671def-4fc8-418b-9cdd-26c96d0a42c3",
 				"4193ea39-288b-44fe-857a-3b3bf337cd91"
@@ -21,13 +20,15 @@
 			"uuid": "4ee7b101-230c-4334-8806-9bc4f463b0f7",
 			"title": "Doing",
 			"tasks": [
-				"1f5d974b-085c-4e8a-80c6-a5c368403cf3"
+				"ffb3e5c9-0047-43e1-8021-f3b3b4d497f6"
 			]
 		},
 		{
 			"uuid": "24b3160e-ae78-4f72-b617-c55485ed9a6c",
 			"title": "Done",
 			"tasks": [
+				"4a50bb89-a0ad-48cb-944d-fb76f8028443",
+				"1f5d974b-085c-4e8a-80c6-a5c368403cf3",
 				"904bec1a-a9bd-4eb7-b8c8-ea10383df76a",
 				"a4ed94da-8d27-47db-b771-125f2d494c54"
 			]
@@ -86,6 +87,13 @@
 		{
 			"uuid": "4193ea39-288b-44fe-857a-3b3bf337cd91",
 			"title": "Player Death",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "4a50bb89-a0ad-48cb-944d-fb76f8028443",
+			"title": "Wave Spawning",
 			"description": "",
 			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
 			"steps": []
