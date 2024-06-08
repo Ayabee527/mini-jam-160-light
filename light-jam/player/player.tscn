@@ -302,4 +302,5 @@ bus = &"sfx"
 [connection signal="area_exited" from="LaunchDetect" to="StateMachine/Hook" method="_on_launch_detect_area_exited"]
 [connection signal="area_entered" from="LightDetect" to="." method="_on_light_detect_area_entered"]
 [connection signal="area_exited" from="LightDetect" to="." method="_on_light_detect_area_exited"]
+[connection signal="area_entered" from="Smasher" to="." method="_on_smasher_area_entered"]
 [connection signal="area_entered" from="Smasher" to="StateMachine/Hook" method="_on_smasher_area_entered"]

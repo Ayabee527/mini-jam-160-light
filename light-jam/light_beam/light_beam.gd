@@ -17,6 +17,8 @@ signal finished()
 @export var charge_timer: Timer
 @export var sustain_timer: Timer
 
+var tween: Tween
+
 func _ready() -> void:
 	beam.clear_points()
 	beam.add_point(Vector2.ZERO)
@@ -50,7 +52,9 @@ func add_collision() -> void:
 
 func _on_charge_timer_timeout() -> void:
 	fired.emit()
-	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	if tween != null:
+		tween.stop()
+	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.set_parallel()
 	tween.tween_property(
 		beam, "width",
@@ -67,7 +71,9 @@ func _on_charge_timer_timeout() -> void:
 
 func kill() -> void:
 	collision_shape.set_deferred("disabled", true)
-	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	if tween != null:
+		tween.stop()
+	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.set_parallel()
 	tween.tween_property(
 		beam, "width",

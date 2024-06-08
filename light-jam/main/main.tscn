@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d06lpgmwoofe3"]
+[gd_scene load_steps=9 format=3 uid="uid://d06lpgmwoofe3"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_7ngl2"]
 [ext_resource type="PackedScene" uid="uid://c8nusbwukbtai" path="res://player/player.tscn" id="1_lis5i"]
@@ -22,9 +22,6 @@ normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vno5j"]
 normal = Vector2(0, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hj8l0"]
-radius = 12.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7ngl2")
@@ -67,22 +64,13 @@ shape = SubResource("WorldBoundaryShape2D_vno5j")
 [node name="Player" parent="." instance=ExtResource("1_lis5i")]
 position = Vector2(128, 128)
 
-[node name="Grapple" type="Polygon2D" parent="."]
-position = Vector2(128, 128)
-polygon = PackedVector2Array(-8, 0, 0, -8, 8, 0, 0, 8)
+[node name="WaveHandler" type="Node2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="Grapple"]
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple/Area2D"]
-shape = SubResource("CircleShape2D_hj8l0")
-
-[node name="Flasher" parent="." instance=ExtResource("3_6x63a")]
+[node name="Flasher" parent="WaveHandler" instance=ExtResource("3_6x63a")]
 position = Vector2(25, 37)
 
-[node name="Flasher2" parent="." instance=ExtResource("3_6x63a")]
+[node name="Flasher2" parent="WaveHandler" instance=ExtResource("3_6x63a")]
 position = Vector2(178, 207)
 
-[node name="Flasher3" parent="." instance=ExtResource("3_6x63a")]
+[node name="Flasher3" parent="WaveHandler" instance=ExtResource("3_6x63a")]
 position = Vector2(212, 32)

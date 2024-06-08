@@ -60,3 +60,7 @@ func _on_light_detect_area_exited(area: Area2D) -> void:
 func _on_body_entered(body: Node) -> void:
 	MainCam.shake(1, 5, 15)
 	bounce_sound.play()
+
+
+func _on_smasher_area_entered(area: Area2D) -> void:
+	apply_central_impulse(linear_velocity.normalized() * 250.0)

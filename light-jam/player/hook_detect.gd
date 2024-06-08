@@ -25,7 +25,7 @@ func update_highlight() -> void:
 	var closest: Area2D = null
 	var closest_dist: float = INF
 	for grapple: Area2D in grapple_points:
-		var dist = player.global_position.distance_to(grapple.global_position)
+		var dist = global_position.distance_to(grapple.global_position)
 		if dist < closest_dist:
 			closest_dist = dist
 			closest = grapple

@@ -21,6 +21,6 @@ func _on_smash_detect_area_entered(area: Area2D) -> void:
 		grapple.set_deferred("disabled", true)
 		smashed.emit()
 		dead = true
-		MainCam.shake(1, 30, 2)
-		MainCam.hitstop(0.25, 0.5)
+		MainCam.shake(15, 10, 10)
+		MainCam.hitstop(0.2, 0.75)
 		die_sound.play()
