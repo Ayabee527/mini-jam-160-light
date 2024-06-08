@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c8nusbwukbtai"]
+[gd_scene load_steps=35 format=3 uid="uid://c8nusbwukbtai"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_lhvak"]
 [ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="2_kd5qd"]
@@ -19,7 +19,7 @@ bounce = 0.75
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_f2qbe"]
+[sub_resource type="CurveTexture" id="CurveTexture_xrt75"]
 curve = SubResource("Curve_ndvdx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cjb3d"]
@@ -27,7 +27,7 @@ particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.25
-scale_curve = SubResource("CurveTexture_f2qbe")
+scale_curve = SubResource("CurveTexture_xrt75")
 
 [sub_resource type="Curve" id="Curve_vi133"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -108,6 +108,9 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_pwdx0"]
 radius = 6.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hfrou"]
+radius = 8.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d81pv"]
 random_pitch = 1.5
 streams_count = 1
@@ -138,7 +141,7 @@ streams_count = 1
 stream_0/stream = ExtResource("11_owmya")
 stream_0/weight = 1.0
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("shape", "fill", "burn_particles", "hook_sound", "latch_sound", "launch_sound", "buzz_sound", "bounce_sound")]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("shape", "fill", "burn_particles", "hook_sound", "latch_sound", "launch_sound", "buzz_sound", "bounce_sound") groups=["player"]]
 collision_layer = 6
 physics_material_override = SubResource("PhysicsMaterial_rsa7s")
 gravity_scale = 0.5
@@ -162,9 +165,10 @@ initial_state = NodePath("Fall")
 script = ExtResource("3_vaam4")
 hook_detect = NodePath("../../GrappleHolder/HookDetect")
 
-[node name="Hook" type="Node" parent="StateMachine" node_paths=PackedStringArray("grapple_line", "launch_window", "launch_particles", "launch_celebrate")]
+[node name="Hook" type="Node" parent="StateMachine" node_paths=PackedStringArray("smasher", "grapple_line", "launch_window", "launch_particles", "launch_celebrate")]
 script = ExtResource("4_1vtdg")
-grapple_speed = 1000.0
+smasher = NodePath("../../Smasher/CollisionShape2D")
+grapple_speed = 2000.0
 grapple_line = NodePath("../../GrappleLine")
 launch_window = NodePath("LaunchWindow")
 launch_particles = NodePath("../../LaunchParticles")
@@ -251,6 +255,14 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightDetect"]
 shape = SubResource("CircleShape2D_pwdx0")
 
+[node name="Smasher" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Smasher"]
+shape = SubResource("CircleShape2D_hfrou")
+disabled = true
+
 [node name="Hook" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_d81pv")
 volume_db = -10.0
@@ -283,6 +295,7 @@ bus = &"sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="StateMachine/Hook/LaunchWindow" to="StateMachine/Hook" method="_on_launch_window_timeout"]
+[connection signal="finished" from="LaunchParticles" to="StateMachine/Hook" method="_on_launch_particles_finished"]
 [connection signal="area_entered" from="GrappleHolder/HookDetect" to="GrappleHolder/HookDetect" method="_on_area_entered"]
 [connection signal="area_exited" from="GrappleHolder/HookDetect" to="GrappleHolder/HookDetect" method="_on_area_exited"]
 [connection signal="area_entered" from="LaunchDetect" to="StateMachine/Hook" method="_on_launch_detect_area_entered"]

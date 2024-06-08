@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_7ngl2"]
 [ext_resource type="PackedScene" uid="uid://c8nusbwukbtai" path="res://player/player.tscn" id="1_lis5i"]
-[ext_resource type="PackedScene" uid="uid://cp72ycqtggt2k" path="res://light_beam/light_beam.tscn" id="2_1av4k"]
+[ext_resource type="PackedScene" uid="uid://7ba58qbtxbjm" path="res://enemies/flasher/flasher.tscn" id="3_6x63a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b55wx"]
 bg_color = Color(0, 0, 0, 1)
@@ -78,8 +78,5 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple/Area2D"]
 shape = SubResource("CircleShape2D_hj8l0")
 
-[node name="LightBeam" parent="." instance=ExtResource("2_1av4k")]
-position = Vector2(128, 0)
-rotation = 1.5708
-charge_time = 2.0
-sustain_time = 10.0
+[node name="Flasher" parent="." instance=ExtResource("3_6x63a")]
+position = Vector2(25, 37)

@@ -1,6 +1,9 @@
 class_name LightBeam
 extends Area2D
 
+signal fired()
+signal finished()
+
 @export var length: float = 363.0
 @export var charge_time: float = 1.0
 @export var sustain_time: float = 1.0
@@ -46,7 +49,7 @@ func add_collision() -> void:
 
 
 func _on_charge_timer_timeout() -> void:
-	collision_shape.set_deferred("disabled", false)
+	fired.emit()
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.set_parallel()
 	tween.tween_property(
@@ -59,16 +62,19 @@ func _on_charge_timer_timeout() -> void:
 	).from(Color.BLACK)
 	tween.play()
 	await tween.finished
-	beam_preview.hide()
+	collision_shape.set_deferred("disabled", false)
 	sustain_timer.start(sustain_time)
 
-
-func _on_sustain_timer_timeout() -> void:
+func kill() -> void:
 	collision_shape.set_deferred("disabled", true)
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.set_parallel()
 	tween.tween_property(
 		beam, "width",
+		0.0, 0.5
+	)
+	tween.tween_property(
+		beam_preview, "width",
 		0.0, 0.5
 	)
 	tween.tween_property(
@@ -78,3 +84,7 @@ func _on_sustain_timer_timeout() -> void:
 	tween.play()
 	await tween.finished
 	queue_free()
+
+func _on_sustain_timer_timeout() -> void:
+	finished.emit()
+	kill()

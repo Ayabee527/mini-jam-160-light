@@ -10,32 +10,82 @@
 		{
 			"uuid": "9abb0949-8725-4ee3-b55c-6166d16d8f4c",
 			"title": "Todo",
-			"tasks": []
+			"tasks": [
+				"ffb3e5c9-0047-43e1-8021-f3b3b4d497f6",
+				"372543cb-9d5c-4030-bff3-6d5c88f980de",
+				"f2671def-4fc8-418b-9cdd-26c96d0a42c3",
+				"4193ea39-288b-44fe-857a-3b3bf337cd91"
+			]
 		},
 		{
 			"uuid": "4ee7b101-230c-4334-8806-9bc4f463b0f7",
 			"title": "Doing",
 			"tasks": [
-				"3ccfd4f5-be7b-4cc4-9350-83137a19602f"
+				"1f5d974b-085c-4e8a-80c6-a5c368403cf3"
 			]
 		},
 		{
 			"uuid": "24b3160e-ae78-4f72-b617-c55485ed9a6c",
 			"title": "Done",
-			"tasks": []
+			"tasks": [
+				"904bec1a-a9bd-4eb7-b8c8-ea10383df76a",
+				"a4ed94da-8d27-47db-b771-125f2d494c54"
+			]
 		}
 	],
 	"tasks": [
 		{
-			"uuid": "3ccfd4f5-be7b-4cc4-9350-83137a19602f",
-			"title": "Snake Player",
+			"uuid": "ede6d08a-2718-4d0b-9432-adbc56b0d45b",
+			"title": "New task",
 			"description": "",
 			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
 			"steps": []
 		},
 		{
-			"uuid": "ede6d08a-2718-4d0b-9432-adbc56b0d45b",
-			"title": "New task",
+			"uuid": "a4ed94da-8d27-47db-b771-125f2d494c54",
+			"title": "Grapple Hook",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "904bec1a-a9bd-4eb7-b8c8-ea10383df76a",
+			"title": "Light Beams",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "1f5d974b-085c-4e8a-80c6-a5c368403cf3",
+			"title": "First Enemy",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "ffb3e5c9-0047-43e1-8021-f3b3b4d497f6",
+			"title": "More Enemies",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "372543cb-9d5c-4030-bff3-6d5c88f980de",
+			"title": "Combos",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "f2671def-4fc8-418b-9cdd-26c96d0a42c3",
+			"title": "Score",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "4193ea39-288b-44fe-857a-3b3bf337cd91",
+			"title": "Player Death",
 			"description": "",
 			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
 			"steps": []

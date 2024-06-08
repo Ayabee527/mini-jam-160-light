@@ -1,5 +1,6 @@
 extends PlayerState
 
+@export var smasher: CollisionShape2D
 @export var grapple_speed: float = 500.0
 
 @export var grapple_line: Line2D
@@ -19,6 +20,7 @@ func enter(msg:={}) -> void:
 		player.latch_sound.play()
 		player.hook_sound.play()
 		MainCam.shake(2)
+		smasher.set_deferred("disabled", false)
 	else:
 		state_machine.transition_to("Fall")
 
@@ -51,8 +53,10 @@ func exit() -> void:
 		launch_particles.restart()
 		launch_celebrate.restart()
 		player.launch_sound.play()
-		MainCam.shake(1, 30, 2)
-		MainCam.hitstop(0.25, 0.5)
+		#MainCam.shake(1, 30, 2)
+		#MainCam.hitstop(0.25, 0.5)
+	else:
+		smasher.set_deferred("disabled", true)
 
 
 func _on_launch_detect_area_entered(area: Area2D) -> void:
@@ -68,3 +72,7 @@ func _on_launch_detect_area_exited(area: Area2D) -> void:
 
 func _on_launch_window_timeout() -> void:
 	state_machine.transition_to("Fall")
+
+
+func _on_launch_particles_finished() -> void:
+	smasher.set_deferred("disabled", true)
