@@ -80,3 +80,9 @@ shape = SubResource("CircleShape2D_hj8l0")
 
 [node name="Flasher" parent="." instance=ExtResource("3_6x63a")]
 position = Vector2(25, 37)
+
+[node name="Flasher2" parent="." instance=ExtResource("3_6x63a")]
+position = Vector2(178, 207)
+
+[node name="Flasher3" parent="." instance=ExtResource("3_6x63a")]
+position = Vector2(212, 32)

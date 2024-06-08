@@ -109,7 +109,7 @@ radius = 8.0
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hfrou"]
-radius = 8.0
+radius = 16.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d81pv"]
 random_pitch = 1.5
@@ -175,7 +175,7 @@ launch_particles = NodePath("../../LaunchParticles")
 launch_celebrate = NodePath("../../LaunchCelebrate")
 
 [node name="LaunchWindow" type="Timer" parent="StateMachine/Hook"]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
 
 [node name="Trail" type="GPUParticles2D" parent="."]
@@ -302,3 +302,4 @@ bus = &"sfx"
 [connection signal="area_exited" from="LaunchDetect" to="StateMachine/Hook" method="_on_launch_detect_area_exited"]
 [connection signal="area_entered" from="LightDetect" to="." method="_on_light_detect_area_entered"]
 [connection signal="area_exited" from="LightDetect" to="." method="_on_light_detect_area_exited"]
+[connection signal="area_entered" from="Smasher" to="StateMachine/Hook" method="_on_smasher_area_entered"]

@@ -7,7 +7,7 @@ signal smashed()
 @export var grapple: CollisionShape2D
 @export var anim_player: AnimationPlayer
 
-@export var state_machine: StateMachine
+@export var die_sound: AudioStreamPlayer
 
 var player: Player
 var dead: bool = false
@@ -23,3 +23,4 @@ func _on_smash_detect_area_entered(area: Area2D) -> void:
 		dead = true
 		MainCam.shake(1, 30, 2)
 		MainCam.hitstop(0.25, 0.5)
+		die_sound.play()

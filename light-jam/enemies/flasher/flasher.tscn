@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://7ba58qbtxbjm"]
+[gd_scene load_steps=28 format=3 uid="uid://7ba58qbtxbjm"]
 
 [ext_resource type="Script" path="res://enemies/flasher/flasher.gd" id="1_0imrd"]
 [ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_th205"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://enemies/flasher/states/frozen.gd" id="3_npt3v"]
 [ext_resource type="Script" path="res://enemies/flasher/states/flash.gd" id="4_881th"]
 [ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="6_dfby3"]
+[ext_resource type="AudioStream" uid="uid://xrrpa222gr8n" path="res://assets/sounds/hook.ogg" id="7_htmb7"]
+[ext_resource type="AudioStream" uid="uid://hhisb63xkucx" path="res://assets/sounds/explode.wav" id="8_rf200"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1utle"]
 bounce = 0.5
@@ -226,11 +228,23 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8jmt2"]
-radius = 32.0
+radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mdtei"]
 
-[node name="Flasher" type="RigidBody2D" node_paths=PackedStringArray("smash_detect", "grapple", "anim_player", "state_machine")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gvdrm"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("7_htmb7")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kqbfx"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("8_rf200")
+stream_0/weight = 1.0
+
+[node name="Flasher" type="RigidBody2D" node_paths=PackedStringArray("smash_detect", "grapple", "anim_player", "die_sound")]
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_1utle")
 gravity_scale = 0.0
@@ -238,7 +252,7 @@ script = ExtResource("1_0imrd")
 smash_detect = NodePath("SmashDetect/CollisionShape2D")
 grapple = NodePath("Grapple/CollisionShape2D")
 anim_player = NodePath("AnimationPlayer")
-state_machine = NodePath("StateMachine")
+die_sound = NodePath("Die")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_th205")
@@ -247,10 +261,11 @@ initial_state = NodePath("Frozen")
 [node name="Frozen" type="Node" parent="StateMachine"]
 script = ExtResource("3_npt3v")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("light_point")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("light_point", "chase_sound")]
 script = ExtResource("3_3brog")
 turn_speed = 1.5
 light_point = NodePath("../../LightPoint")
+chase_sound = NodePath("../../Chase")
 
 [node name="Flash" type="Node" parent="StateMachine"]
 script = ExtResource("4_881th")
@@ -321,6 +336,17 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmashDetect"]
 shape = SubResource("CircleShape2D_mdtei")
 disabled = true
+
+[node name="Chase" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_gvdrm")
+volume_db = -15.0
+pitch_scale = 3.0
+bus = &"sfx"
+
+[node name="Die" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_kqbfx")
+volume_db = -10.0
+bus = &"sfx"
 
 [connection signal="smashed" from="." to="StateMachine/Chase" method="_on_flasher_smashed"]
 [connection signal="smashed" from="." to="StateMachine/Flash" method="_on_flasher_smashed"]
