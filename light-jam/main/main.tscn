@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d06lpgmwoofe3"]
+[gd_scene load_steps=10 format=3 uid="uid://d06lpgmwoofe3"]
 
+[ext_resource type="Script" path="res://main/main.gd" id="1_7ngl2"]
 [ext_resource type="PackedScene" uid="uid://c8nusbwukbtai" path="res://player/player.tscn" id="1_lis5i"]
+[ext_resource type="PackedScene" uid="uid://cp72ycqtggt2k" path="res://light_beam/light_beam.tscn" id="2_1av4k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b55wx"]
 bg_color = Color(0, 0, 0, 1)
@@ -25,6 +27,7 @@ normal = Vector2(0, 1)
 radius = 12.0
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_7ngl2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -74,3 +77,9 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple/Area2D"]
 shape = SubResource("CircleShape2D_hj8l0")
+
+[node name="LightBeam" parent="." instance=ExtResource("2_1av4k")]
+position = Vector2(128, 0)
+rotation = 1.5708
+charge_time = 2.0
+sustain_time = 10.0
