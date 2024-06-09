@@ -8,6 +8,7 @@ signal game_ended()
 @export var retry_butt: Button
 @export var menu_butt: Button
 @export var gameover_label: RichTextLabel
+@export var score_label: RichTextLabel
 @export var multiplier_label: Label
 @export var mouse_info: RichTextLabel
 
@@ -52,6 +53,7 @@ func game_over() -> void:
 	menu_butt.show()
 	gameover_label.show()
 	multiplier_label.hide()
+	mouse_info.hide()
 
 func _on_player_burnt() -> void:
 	burning = true
@@ -65,6 +67,8 @@ func _on_wave_handler_enemy_killed(enemy: Node2D) -> void:
 	death_value -= 5.0
 	if mouse_info.visible:
 		mouse_info.hide()
+		multiplier_label.show()
+		score_label.show()
 
 
 func _on_retry_pressed() -> void:

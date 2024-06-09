@@ -23,6 +23,7 @@ const COSTS = {
 	"SNIPER": 10,
 }
 
+@export var time_before_start: float = 5.0
 @export var extra_spend: int = 2
 
 var wave_size: int = 0
@@ -32,6 +33,7 @@ var spawned_enemies: Array[Node2D] = []
 var spawned_grapples: Array[Node2D] = []
 
 func _ready() -> void:
+	await get_tree().create_timer(time_before_start, false).timeout
 	spawn_wave()
 
 func spawn_wave() -> void:

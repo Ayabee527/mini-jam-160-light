@@ -19,6 +19,7 @@ signal died()
 @export var launch_sound: AudioStreamPlayer
 @export var buzz_sound: AudioStreamPlayer
 @export var bounce_sound: AudioStreamPlayer
+@export var die_sound: AudioStreamPlayer
 
 var lights: Array[LightBeam]
 
@@ -84,6 +85,7 @@ func die() -> void:
 		trail_particles.hide()
 		death_particles.restart()
 		set_deferred("freeze", true)
+		die_sound.play()
 		died.emit()
 		
 		burn_particles.emitting = false

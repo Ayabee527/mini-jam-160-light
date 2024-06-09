@@ -99,7 +99,7 @@ _data = {
 "scroll": SubResource("Animation_jlgh8")
 }
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("quit_butt", "last_score_label", "high_score_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -107,6 +107,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nhdx5")
+quit_butt = NodePath("BG/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer/Quit")
+last_score_label = NodePath("BG/MarginContainer/Scores/Latest")
+high_score_label = NodePath("BG/MarginContainer/Scores/High")
 
 [node name="BG" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(256, 256)
@@ -114,6 +117,60 @@ layout_mode = 0
 offset_right = 256.0
 offset_bottom = 256.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_brlxu")
+
+[node name="MarginContainer" type="MarginContainer" parent="BG"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Scores" type="HBoxContainer" parent="BG/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Latest" type="Label" parent="BG/MarginContainer/Scores"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = ExtResource("1_lm6st")
+theme_override_font_sizes/font_size = 8
+text = "LAST 000000"
+
+[node name="VS" type="Label" parent="BG/MarginContainer/Scores"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = ExtResource("1_lm6st")
+theme_override_font_sizes/font_size = 8
+text = "VS"
+
+[node name="High" type="Label" parent="BG/MarginContainer/Scores"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = ExtResource("1_lm6st")
+theme_override_font_sizes/font_size = 8
+text = "000000 HIGH"
+
+[node name="Version" type="Label" parent="BG/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = ExtResource("1_lm6st")
+theme_override_font_sizes/font_size = 8
+text = "Version 1.0.0"
+
+[node name="Credit" type="Label" parent="BG/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = ExtResource("1_lm6st")
+theme_override_font_sizes/font_size = 8
+text = "Made by pixemisti"
 
 [node name="CenterContainer" type="CenterContainer" parent="BG"]
 layout_mode = 2

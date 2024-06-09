@@ -10,22 +10,21 @@
 		{
 			"uuid": "9abb0949-8725-4ee3-b55c-6166d16d8f4c",
 			"title": "Todo",
-			"tasks": [
-				"6a247531-a62f-44a8-9cfd-697061206a32",
-				"11b7db3c-cd72-4d7b-a387-bb3471cd3fa7"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "4ee7b101-230c-4334-8806-9bc4f463b0f7",
 			"title": "Doing",
-			"tasks": [
-				"3f01836a-4b97-4da7-adab-cfbd4233d694"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "24b3160e-ae78-4f72-b617-c55485ed9a6c",
 			"title": "Done",
 			"tasks": [
+				"5ae6459a-ffae-4fe7-b76d-dc10f796506a",
+				"11b7db3c-cd72-4d7b-a387-bb3471cd3fa7",
+				"6a247531-a62f-44a8-9cfd-697061206a32",
+				"3f01836a-4b97-4da7-adab-cfbd4233d694",
 				"4193ea39-288b-44fe-857a-3b3bf337cd91",
 				"f2671def-4fc8-418b-9cdd-26c96d0a42c3",
 				"372543cb-9d5c-4030-bff3-6d5c88f980de",
@@ -150,6 +149,13 @@
 		{
 			"uuid": "11b7db3c-cd72-4d7b-a387-bb3471cd3fa7",
 			"title": "Pause Menu",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "5ae6459a-ffae-4fe7-b76d-dc10f796506a",
+			"title": "Highscore and Data Saving + Loading",
 			"description": "",
 			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
 			"steps": []

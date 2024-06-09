@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c8nusbwukbtai"]
+[gd_scene load_steps=40 format=3 uid="uid://c8nusbwukbtai"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_lhvak"]
 [ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="2_kd5qd"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dtkn0q3uoq3hb" path="res://assets/sounds/launch.wav" id="9_eyman"]
 [ext_resource type="AudioStream" uid="uid://ch62a42ewi0sd" path="res://assets/sounds/buzz.ogg" id="10_wlc6y"]
 [ext_resource type="AudioStream" uid="uid://clfna4wfydy7t" path="res://assets/sounds/bounce.wav" id="11_owmya"]
+[ext_resource type="AudioStream" uid="uid://cqq0wn7jk22td" path="res://assets/sounds/die.wav" id="12_ig8bm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsa7s"]
 bounce = 0.75
@@ -158,7 +159,13 @@ streams_count = 1
 stream_0/stream = ExtResource("11_owmya")
 stream_0/weight = 1.0
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("shape", "fill", "burn_particles", "death_particles", "trail_particles", "hook_sound", "latch_sound", "launch_sound", "buzz_sound", "bounce_sound") groups=["player"]]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ob85c"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("12_ig8bm")
+stream_0/weight = 1.0
+
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("shape", "fill", "burn_particles", "death_particles", "trail_particles", "hook_sound", "latch_sound", "launch_sound", "buzz_sound", "bounce_sound", "die_sound") groups=["player"]]
 collision_layer = 6
 physics_material_override = SubResource("PhysicsMaterial_rsa7s")
 gravity_scale = 0.5
@@ -175,6 +182,7 @@ latch_sound = NodePath("Latch")
 launch_sound = NodePath("Launch")
 buzz_sound = NodePath("Buzz")
 bounce_sound = NodePath("Bounce")
+die_sound = NodePath("Die")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_w4jx1")
@@ -321,6 +329,11 @@ bus = &"sfx"
 stream = SubResource("AudioStreamRandomizer_4k0ij")
 volume_db = -15.0
 max_polyphony = 5
+bus = &"sfx"
+
+[node name="Die" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ob85c")
+volume_db = -10.0
 bus = &"sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

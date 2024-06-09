@@ -138,3 +138,7 @@ func _on_player_burnt() -> void:
 
 func _on_player_unburnt() -> void:
 	burning = false
+
+
+func _on_main_game_ended() -> void:
+	Global.save_score(score)

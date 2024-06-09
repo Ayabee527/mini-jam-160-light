@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d06lpgmwoofe3"]
+[gd_scene load_steps=21 format=3 uid="uid://d06lpgmwoofe3"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_7ngl2"]
 [ext_resource type="PackedScene" uid="uid://c8nusbwukbtai" path="res://player/player.tscn" id="1_lis5i"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://bee8wfgvan2ip" path="res://assets/fonts/GravityBold8.ttf" id="4_hual4"]
 [ext_resource type="FontFile" uid="uid://bljrwpu30jvfs" path="res://assets/fonts/fibberish.ttf" id="4_n4vl6"]
 [ext_resource type="AudioStream" uid="uid://br2172fs1tt2w" path="res://assets/music/fly by the photons.ogg" id="5_wix6w"]
+[ext_resource type="Script" path="res://main/pause_menu.gd" id="10_sapll"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b55wx"]
 bg_color = Color(0, 0, 0, 1)
@@ -77,13 +78,17 @@ normal = Vector2(-1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vno5j"]
 normal = Vector2(0, 1)
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "death_meter", "retry_butt", "menu_butt", "gameover_label", "multiplier_label", "mouse_info")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33kqs"]
+bg_color = Color(0, 0, 0, 0.501961)
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "death_meter", "retry_butt", "menu_butt", "gameover_label", "score_label", "multiplier_label", "mouse_info")]
 script = ExtResource("1_7ngl2")
 player = NodePath("Player")
 death_meter = NodePath("CanvasLayer/BG/DeathMeter")
 retry_butt = NodePath("CanvasLayer/BG/MarginContainer/Retry")
 menu_butt = NodePath("CanvasLayer/BG/MarginContainer/Menu")
 gameover_label = NodePath("CanvasLayer/BG/CenterContainer/VBoxContainer/GameOver")
+score_label = NodePath("CanvasLayer/BG/CenterContainer/VBoxContainer/Score")
 multiplier_label = NodePath("CanvasLayer/BG/CenterContainer/VBoxContainer/Multiplier")
 mouse_info = NodePath("CanvasLayer/BG/CenterContainer/VBoxContainer/Mouse")
 
@@ -122,10 +127,20 @@ size_flags_vertical = 6
 [node name="Mouse" type="RichTextLabel" parent="CanvasLayer/BG/CenterContainer/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
+theme_override_colors/default_color = Color(0.501961, 0.501961, 0.501961, 1)
 theme_override_fonts/normal_font = ExtResource("4_n4vl6")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[wave][center]USE YOUR MOUSE!"
+text = "[wave][center]LEFT MOUSE TO HOOK!
+
+RELEASE JUST BEFORE
+SMASH TO BOOST!
+
+PLAY STYLISHLY AND
+MOVE FAST TO
+SCORE HIGHER!
+
+AND AVOID THE LIGHT!"
 fit_content = true
 autowrap_mode = 0
 
@@ -144,6 +159,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Score" type="RichTextLabel" parent="CanvasLayer/BG/CenterContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.501961, 0.501961, 0.501961, 1)
 theme_override_colors/font_shadow_color = Color(0.25098, 0.25098, 0.25098, 1)
@@ -157,6 +173,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Multiplier" type="Label" parent="CanvasLayer/BG/CenterContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_n4vl6")
 theme_override_font_sizes/font_size = 16
@@ -246,6 +263,45 @@ volume_db = -5.0
 autoplay = true
 bus = &"music"
 
+[node name="PauseMenu" type="PanelContainer" parent="."]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(256, 256)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_33kqs")
+script = ExtResource("10_sapll")
+
+[node name="CenterContainer" type="CenterContainer" parent="PauseMenu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/CenterContainer"]
+layout_mode = 2
+
+[node name="PAUSED" type="RichTextLabel" parent="PauseMenu/CenterContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/normal_font = ExtResource("4_n4vl6")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[wave amp=48][rainbow]PAUSED"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Unpause" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_hual4")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_ub2y2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2lnul")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qgwtu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3tpku")
+text = "UNPAuSE"
+
+[connection signal="game_ended" from="." to="ScoreHandler" method="_on_main_game_ended"]
 [connection signal="pressed" from="CanvasLayer/BG/MarginContainer/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="CanvasLayer/BG/MarginContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="burnt" from="Player" to="." method="_on_player_burnt"]
@@ -256,3 +312,4 @@ bus = &"music"
 [connection signal="enemy_killed" from="WaveHandler" to="." method="_on_wave_handler_enemy_killed"]
 [connection signal="enemy_killed" from="WaveHandler" to="ScoreHandler" method="_on_wave_handler_enemy_killed"]
 [connection signal="wave_cleared" from="WaveHandler" to="ScoreHandler" method="_on_wave_handler_wave_cleared"]
+[connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Unpause" to="PauseMenu" method="_on_unpause_pressed"]
