@@ -65,7 +65,7 @@ scale_max = 0.2
 scale_curve = SubResource("CurveTexture_7miqp")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eibhq"]
-radius = 12.0
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8jmt2"]
 radius = 12.0

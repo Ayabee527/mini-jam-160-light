@@ -165,9 +165,10 @@ initial_state = NodePath("Fall")
 script = ExtResource("3_vaam4")
 hook_detect = NodePath("../../GrappleHolder/HookDetect")
 
-[node name="Hook" type="Node" parent="StateMachine" node_paths=PackedStringArray("smasher", "grapple_line", "launch_window", "launch_particles", "launch_celebrate")]
+[node name="Hook" type="Node" parent="StateMachine" node_paths=PackedStringArray("smasher", "light_detect", "grapple_line", "launch_window", "launch_particles", "launch_celebrate")]
 script = ExtResource("4_1vtdg")
 smasher = NodePath("../../Smasher/CollisionShape2D")
+light_detect = NodePath("../../LightDetect/CollisionShape2D")
 grapple_speed = 2000.0
 grapple_line = NodePath("../../GrappleLine")
 launch_window = NodePath("LaunchWindow")

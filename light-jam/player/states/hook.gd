@@ -1,6 +1,7 @@
 extends PlayerState
 
 @export var smasher: CollisionShape2D
+@export var light_detect: CollisionShape2D
 @export var grapple_speed: float = 500.0
 
 @export var grapple_line: Line2D
@@ -45,6 +46,7 @@ func physics_update(delta: float) -> void:
 	
 	if in_grapple:
 		smasher.set_deferred("disabled", false)
+		light_detect.set_deferred("disabled", true)
 		player.apply_central_impulse(
 			player.linear_velocity
 			+ ( player.linear_velocity.normalized() * previous_vel.length() * 0.25 )
@@ -83,6 +85,7 @@ func _on_launch_window_timeout() -> void:
 
 func _on_launch_particles_finished() -> void:
 	smasher.set_deferred("disabled", true)
+	light_detect.set_deferred("disabled", false)
 
 
 func _on_smasher_area_entered(area: Area2D) -> void:
