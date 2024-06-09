@@ -22,7 +22,7 @@ func fire_first() -> void:
 	beam_one = BEAM.instantiate()
 	beam_one.charge_time = 1.0
 	beam_one.sustain_time = 1.0
-	beam_two.end_width = 256
+	beam_one.end_width = 256
 	light_holder_1.add_child(beam_one)
 
 func fire_second() -> void:

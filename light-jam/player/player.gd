@@ -1,6 +1,9 @@
 class_name Player
 extends RigidBody2D
 
+signal burnt()
+signal unburnt()
+
 @export var shape: Polygon2D
 @export var fill: Polygon2D
 @export var burn_particles: GPUParticles2D
@@ -48,6 +51,7 @@ func _on_light_detect_area_entered(area: Area2D) -> void:
 	burn_particles.emitting = true
 	if not buzz_sound.playing:
 		buzz_sound.play()
+		burnt.emit()
 
 
 func _on_light_detect_area_exited(area: Area2D) -> void:
@@ -55,6 +59,7 @@ func _on_light_detect_area_exited(area: Area2D) -> void:
 	if lights.size() <= 0:
 		burn_particles.emitting = false
 		buzz_sound.stop()
+		unburnt.emit()
 
 
 func _on_body_entered(body: Node) -> void:

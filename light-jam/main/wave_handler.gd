@@ -1,6 +1,9 @@
 class_name WaveHandler
 extends Node2D
 
+signal enemy_killed()
+signal wave_cleared()
+
 const FLASHER = preload("res://enemies/flasher/flasher.tscn")
 const RAPIDO = preload("res://enemies/rapido/rapido.tscn")
 const SPOOTLIGHT = preload("res://enemies/spotlight/spotlight.tscn")

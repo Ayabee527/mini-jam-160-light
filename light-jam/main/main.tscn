@@ -26,8 +26,10 @@ normal = Vector2(-1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vno5j"]
 normal = Vector2(0, 1)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "death_meter")]
 script = ExtResource("1_7ngl2")
+player = NodePath("Player")
+death_meter = NodePath("CanvasLayer/BG/DeathMeter")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -43,7 +45,7 @@ layout_mode = 2
 fill_mode = 3
 nine_patch_stretch = true
 texture_progress = ExtResource("2_hb6u5")
-tint_progress = Color(1, 1, 1, 0.25098)
+tint_progress = Color(1, 0, 0, 0.25098)
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -94,3 +96,6 @@ stream = ExtResource("5_wix6w")
 volume_db = -5.0
 autoplay = true
 bus = &"music"
+
+[connection signal="burnt" from="Player" to="." method="_on_player_burnt"]
+[connection signal="unburnt" from="Player" to="." method="_on_player_unburnt"]
