@@ -1,7 +1,7 @@
 extends PlayerState
 
 @export var hook_detect: PlayerHookDetect
-@export var move_speed: float = 250.0
+@export var move_speed: float = 500.0
 
 func physics_update(delta: float) -> void:
 	player.apply_central_force(

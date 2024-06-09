@@ -18,6 +18,7 @@ signal finished()
 @export var sustain_timer: Timer
 
 var tween: Tween
+var killed: bool = false
 
 func _ready() -> void:
 	beam.clear_points()
@@ -51,45 +52,48 @@ func add_collision() -> void:
 
 
 func _on_charge_timer_timeout() -> void:
-	fired.emit()
-	if tween != null:
-		tween.stop()
-	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.set_parallel()
-	tween.tween_property(
-		beam, "width",
-		end_width, 0.5
-	)
-	tween.tween_property(
-		beam, "default_color",
-		Color.WHITE, 0.5
-	).from(Color.BLACK)
-	tween.play()
-	await tween.finished
-	collision_shape.set_deferred("disabled", false)
-	sustain_timer.start(sustain_time)
+	if not killed:
+		fired.emit()
+		if tween != null:
+			tween.stop()
+		tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.set_parallel()
+		tween.tween_property(
+			beam, "width",
+			end_width, 0.5
+		)
+		tween.tween_property(
+			beam, "default_color",
+			Color.WHITE, 0.5
+		).from(Color.BLACK)
+		tween.play()
+		await tween.finished
+		collision_shape.set_deferred("disabled", false)
+		sustain_timer.start(sustain_time)
 
 func kill() -> void:
-	collision_shape.set_deferred("disabled", true)
-	if tween != null:
-		tween.stop()
-	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.set_parallel()
-	tween.tween_property(
-		beam, "width",
-		0.0, 0.5
-	)
-	tween.tween_property(
-		beam_preview, "width",
-		0.0, 0.5
-	)
-	tween.tween_property(
-		beam, "default_color",
-		Color.BLACK, 0.5
-	)
-	tween.play()
-	await tween.finished
-	queue_free()
+	if not killed:
+		killed = true
+		collision_shape.set_deferred("disabled", true)
+		if tween != null:
+			tween.stop()
+		tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.set_parallel()
+		tween.tween_property(
+			beam, "width",
+			0.0, 0.5
+		)
+		tween.tween_property(
+			beam_preview, "width",
+			0.0, 0.5
+		)
+		tween.tween_property(
+			beam, "default_color",
+			Color.BLACK, 0.5
+		)
+		tween.play()
+		await tween.finished
+		queue_free()
 
 func _on_sustain_timer_timeout() -> void:
 	finished.emit()

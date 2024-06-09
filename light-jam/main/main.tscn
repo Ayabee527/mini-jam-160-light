@@ -62,9 +62,6 @@ position = Vector2(128, 2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallUp"]
 shape = SubResource("WorldBoundaryShape2D_vno5j")
 
-[node name="Player" parent="." instance=ExtResource("1_lis5i")]
-position = Vector2(128, 128)
-
 [node name="HookPoint1" parent="." instance=ExtResource("4_3ae5r")]
 position = Vector2(128, 224)
 
@@ -76,6 +73,9 @@ position = Vector2(224, 128)
 
 [node name="HookPoint4" parent="." instance=ExtResource("4_3ae5r")]
 position = Vector2(32, 128)
+
+[node name="Player" parent="." instance=ExtResource("1_lis5i")]
+position = Vector2(128, 128)
 
 [node name="WaveHandler" type="Node2D" parent="."]
 script = ExtResource("3_mky24")

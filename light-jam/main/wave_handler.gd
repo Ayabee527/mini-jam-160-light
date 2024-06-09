@@ -2,13 +2,16 @@ class_name WaveHandler
 extends Node2D
 
 const FLASHER = preload("res://enemies/flasher/flasher.tscn")
+const RAPIDO = preload("res://enemies/rapido/rapido.tscn")
 
 const ENEMIES = {
-	"FLASHER": FLASHER
+	"FLASHER": FLASHER,
+	"RAPIDO": RAPIDO,
 }
 
 const COSTS = {
-	"FLASHER": 2
+	"FLASHER": 2,
+	"RAPIDO": 6
 }
 
 @export var extra_spend: int = 2

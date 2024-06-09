@@ -1,39 +1,38 @@
-[gd_scene load_steps=28 format=3 uid="uid://7ba58qbtxbjm"]
+[gd_scene load_steps=25 format=3 uid="uid://cb6c5jd8n326m"]
 
-[ext_resource type="Script" path="res://enemies/flasher/flasher.gd" id="1_0imrd"]
-[ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_th205"]
-[ext_resource type="Script" path="res://enemies/flasher/states/chase.gd" id="3_3brog"]
-[ext_resource type="Script" path="res://enemies/flasher/states/frozen.gd" id="3_npt3v"]
-[ext_resource type="Script" path="res://enemies/flasher/states/flash.gd" id="4_881th"]
-[ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="6_dfby3"]
-[ext_resource type="AudioStream" uid="uid://xrrpa222gr8n" path="res://assets/sounds/hook.ogg" id="7_htmb7"]
-[ext_resource type="AudioStream" uid="uid://hhisb63xkucx" path="res://assets/sounds/explode.wav" id="8_rf200"]
+[ext_resource type="Script" path="res://enemies/rapido/rapido.gd" id="1_4jela"]
+[ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="1_iyfec"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_r0m64"]
+[ext_resource type="Script" path="res://enemies/rapido/states/frozen.gd" id="3_wbk1u"]
+[ext_resource type="Script" path="res://enemies/rapido/states/bounce.gd" id="4_asp22"]
+[ext_resource type="AudioStream" uid="uid://hhisb63xkucx" path="res://assets/sounds/explode.wav" id="6_wvg6q"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1utle"]
-bounce = 0.5
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x2esj"]
+rough = true
+bounce = 0.25
 
-[sub_resource type="Curve" id="Curve_7rper"]
+[sub_resource type="Curve" id="Curve_b8nht"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_x1uus"]
-curve = SubResource("Curve_7rper")
+[sub_resource type="CurveTexture" id="CurveTexture_t3qi8"]
+curve = SubResource("Curve_b8nht")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bdgjd"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8pnoq"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 scale_min = 0.08
 scale_max = 0.2
-scale_curve = SubResource("CurveTexture_x1uus")
+scale_curve = SubResource("CurveTexture_t3qi8")
 
-[sub_resource type="Curve" id="Curve_qbjga"]
+[sub_resource type="Curve" id="Curve_g16rv"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_irahi"]
-curve = SubResource("Curve_qbjga")
+[sub_resource type="CurveTexture" id="CurveTexture_fbvbe"]
+curve = SubResource("Curve_g16rv")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xmhb4"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x0888"]
 particle_flag_disable_z = true
 spread = 180.0
 initial_velocity_min = 100.0
@@ -41,16 +40,16 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.25
-scale_curve = SubResource("CurveTexture_irahi")
+scale_curve = SubResource("CurveTexture_fbvbe")
 
-[sub_resource type="Curve" id="Curve_jysbi"]
+[sub_resource type="Curve" id="Curve_dd1po"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.253333, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_7miqp"]
-curve = SubResource("Curve_jysbi")
+[sub_resource type="CurveTexture" id="CurveTexture_5tlvs"]
+curve = SubResource("Curve_dd1po")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wu8lr"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_trdap"]
 particle_flag_disable_z = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
@@ -62,29 +61,17 @@ radial_accel_min = -50.0
 radial_accel_max = -50.0
 scale_min = 0.1
 scale_max = 0.2
-scale_curve = SubResource("CurveTexture_7miqp")
+scale_curve = SubResource("CurveTexture_5tlvs")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_eibhq"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6nyru"]
 radius = 12.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8jmt2"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_yrpcb"]
 radius = 12.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mdtei"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_m28mg"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gvdrm"]
-random_pitch = 1.1
-streams_count = 1
-stream_0/stream = ExtResource("7_htmb7")
-stream_0/weight = 1.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kqbfx"]
-random_pitch = 1.2
-streams_count = 1
-stream_0/stream = ExtResource("8_rf200")
-stream_0/weight = 1.0
-
-[sub_resource type="Animation" id="Animation_6u5d6"]
+[sub_resource type="Animation" id="Animation_qtvpd"]
 resource_name = "spawn"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -101,26 +88,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Spawning:emitting")
+tracks/1/path = NodePath("SpawnDone:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SpawnDone:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spawning:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -135,31 +122,31 @@ tracks/3/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_8cej8"]
+[sub_resource type="Animation" id="Animation_qpy58"]
 resource_name = "die"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Trail:emitting")
+tracks/0/path = NodePath("Death:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Death:emitting")
+tracks/1/path = NodePath("Trail:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -173,8 +160,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Spawning:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[sub_resource type="Animation" id="Animation_ojecu"]
+[sub_resource type="Animation" id="Animation_a4q7a"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -191,19 +190,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Spawning:emitting")
+tracks/1/path = NodePath("SpawnDone:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SpawnDone:emitting")
+tracks/2/path = NodePath("Spawning:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -222,7 +221,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -237,52 +236,58 @@ tracks/4/keys = {
 "values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ygxsk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_agmmy"]
 _data = {
-"RESET": SubResource("Animation_ojecu"),
-"die": SubResource("Animation_8cej8"),
-"spawn": SubResource("Animation_6u5d6")
+"RESET": SubResource("Animation_a4q7a"),
+"die": SubResource("Animation_qpy58"),
+"spawn": SubResource("Animation_qtvpd")
 }
 
-[node name="Flasher" type="RigidBody2D" node_paths=PackedStringArray("smash_detect", "grapple", "anim_player", "die_sound")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ylkrx"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("6_wvg6q")
+stream_0/weight = 1.0
+
+[node name="Rapido" type="RigidBody2D" node_paths=PackedStringArray("smash_detect", "grapple", "anim_player", "die_sound")]
 collision_layer = 2
-physics_material_override = SubResource("PhysicsMaterial_1utle")
+physics_material_override = SubResource("PhysicsMaterial_x2esj")
 gravity_scale = 0.0
-script = ExtResource("1_0imrd")
+angular_velocity = 1.0472
+script = ExtResource("1_4jela")
 smash_detect = NodePath("SmashDetect/CollisionShape2D")
 grapple = NodePath("Grapple/CollisionShape2D")
 anim_player = NodePath("AnimationPlayer")
 die_sound = NodePath("Die")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_th205")
+script = ExtResource("2_r0m64")
 initial_state = NodePath("Frozen")
 
 [node name="Frozen" type="Node" parent="StateMachine"]
-script = ExtResource("3_npt3v")
+script = ExtResource("3_wbk1u")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("light_point", "chase_sound")]
-script = ExtResource("3_3brog")
-turn_speed = 1.5
-light_point = NodePath("../../LightPoint")
-chase_sound = NodePath("../../Chase")
+[node name="Bounce" type="Node" parent="StateMachine" node_paths=PackedStringArray("fire_timer", "light_holder_1", "light_holder_2")]
+script = ExtResource("4_asp22")
+fire_timer = NodePath("FireTimer")
+light_holder_1 = NodePath("../../LightHolder1")
+light_holder_2 = NodePath("../../LightHolder2")
 
-[node name="Flash" type="Node" parent="StateMachine"]
-script = ExtResource("4_881th")
+[node name="FireTimer" type="Timer" parent="StateMachine/Bounce"]
 
 [node name="Trail" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 10
-process_material = SubResource("ParticleProcessMaterial_bdgjd")
-texture = ExtResource("6_dfby3")
+process_material = SubResource("ParticleProcessMaterial_8pnoq")
+texture = ExtResource("1_iyfec")
 explosiveness = 0.1
 randomness = 1.0
 
 [node name="SpawnDone" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 10
-process_material = SubResource("ParticleProcessMaterial_xmhb4")
-texture = ExtResource("6_dfby3")
+process_material = SubResource("ParticleProcessMaterial_x0888")
+texture = ExtResource("1_iyfec")
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
@@ -290,38 +295,42 @@ randomness = 1.0
 [node name="Death" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 100
-process_material = SubResource("ParticleProcessMaterial_xmhb4")
-texture = ExtResource("6_dfby3")
+process_material = SubResource("ParticleProcessMaterial_x0888")
+texture = ExtResource("1_iyfec")
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 
 [node name="Spawning" type="GPUParticles2D" parent="."]
+emitting = false
 amount = 10
-process_material = SubResource("ParticleProcessMaterial_wu8lr")
-texture = ExtResource("6_dfby3")
+process_material = SubResource("ParticleProcessMaterial_trdap")
+texture = ExtResource("1_iyfec")
 randomness = 1.0
 
-[node name="LightPoint" type="Marker2D" parent="."]
-position = Vector2(4, 0)
+[node name="LightHolder1" type="Marker2D" parent="."]
+position = Vector2(-6, 0)
+rotation = 3.14159
+
+[node name="LightHolder2" type="Marker2D" parent="."]
+position = Vector2(6, 0)
 
 [node name="Shape" type="Polygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-8, 0, 0, -8, 6, -2, 12, 0, 6, 2, 0, 8)
+polygon = PackedVector2Array(-6, 0, -8, -1, 0, -6, 8, -1, 6, 0, 8, 1, 0, 6, -8, 1)
 
 [node name="Fill" type="Polygon2D" parent="Shape"]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-6, 0, 0, -6, 4, -2, 2, 0, 4, 2, 0, 6)
+polygon = PackedVector2Array(-3, 0, -5, -1, 0, -4, 5, -1, 3, 0, 5, 1, 0, 4, -5, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_eibhq")
+shape = SubResource("CircleShape2D_6nyru")
 
 [node name="Grapple" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple"]
-shape = SubResource("CircleShape2D_8jmt2")
+shape = SubResource("CircleShape2D_yrpcb")
 disabled = true
 
 [node name="SmashDetect" type="Area2D" parent="."]
@@ -329,27 +338,21 @@ collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmashDetect"]
-shape = SubResource("CircleShape2D_mdtei")
+shape = SubResource("CircleShape2D_m28mg")
 disabled = true
-
-[node name="Chase" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_gvdrm")
-volume_db = -15.0
-pitch_scale = 3.0
-bus = &"sfx"
-
-[node name="Die" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_kqbfx")
-volume_db = -10.0
-bus = &"sfx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ygxsk")
+"": SubResource("AnimationLibrary_agmmy")
 }
 autoplay = "spawn"
 
-[connection signal="smashed" from="." to="StateMachine/Chase" method="_on_flasher_smashed"]
-[connection signal="smashed" from="." to="StateMachine/Flash" method="_on_flasher_smashed"]
+[node name="Die" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ylkrx")
+volume_db = -10.0
+bus = &"sfx"
+
+[connection signal="timeout" from="StateMachine/Bounce/FireTimer" to="StateMachine/Bounce" method="_on_fire_timer_timeout"]
 [connection signal="area_entered" from="SmashDetect" to="." method="_on_smash_detect_area_entered"]
+[connection signal="area_entered" from="SmashDetect" to="StateMachine/Bounce" method="_on_smash_detect_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Frozen" method="_on_animation_player_animation_finished"]

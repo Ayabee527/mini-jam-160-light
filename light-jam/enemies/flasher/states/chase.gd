@@ -13,6 +13,8 @@ func enter(_msg:={}) -> void:
 	chase_sound.play()
 	
 	beam = BEAM.instantiate()
+	beam.start_width = 8.0
+	beam.end_width = 8.0
 	#beam.global_position = light_point.global_position
 	beam.charge_time = 2
 	beam.sustain_time = 2
