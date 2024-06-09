@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 	
 	if burning:
 		MainCam.shake(5, 10, 10)
-		death_value += 120.0 * delta
+		death_value += 60.0 * delta
 	else:
 		var player_speed_ratio = player.linear_velocity.length() / 100.0
 		death_value -= player_speed_ratio * delta
@@ -21,6 +21,11 @@ func _process(delta: float) -> void:
 	death_value = clamp(death_value, 0.0, 100.0)
 	death_meter.value = death_value
 
+func _physics_process(delta: float) -> void:
+	if burning:
+		player.apply_central_force(
+			player.linear_velocity.rotated(PI) * 5.0
+		)
 
 func _on_player_burnt() -> void:
 	burning = true

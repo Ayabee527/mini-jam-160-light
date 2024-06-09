@@ -97,7 +97,7 @@ func _on_wave_handler_enemy_killed(enemy: Node2D) -> void:
 	print(clicks_in_wave, ", ", last_kill_clicks, ", ", kill_combo)
 	if (clicks_in_wave == last_kill_clicks):
 		if kill_combo > 1:
-			trigger_style("COMBO x" + str(kill_combo))
+			trigger_style("COMBO x" + str(kill_combo + 1))
 		else:
 			trigger_style("SMASH")
 		kill_combo += 1
