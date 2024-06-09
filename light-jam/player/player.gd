@@ -4,6 +4,8 @@ extends RigidBody2D
 signal burnt()
 signal unburnt()
 
+signal grappled(target: Node2D)
+
 @export var shape: Polygon2D
 @export var fill: Polygon2D
 @export var burn_particles: GPUParticles2D
@@ -66,6 +68,8 @@ func _on_body_entered(body: Node) -> void:
 	MainCam.shake(1, 5, 15)
 	bounce_sound.play()
 
+func die() -> void:
+	pass
 
 func _on_smasher_area_entered(area: Area2D) -> void:
 	pass

@@ -24,6 +24,7 @@ func enter(msg:={}) -> void:
 		player.hook_sound.play()
 		MainCam.shake(2)
 		smasher.set_deferred("disabled", false)
+		player.grappled.emit(grapple_point)
 	else:
 		state_machine.transition_to("Fall")
 

@@ -16,7 +16,8 @@ func enter(_msg:={}) -> void:
 	beam_holder.add_child(beam)
 	
 	await beam.fired
-	state_machine.transition_to("Firing", {"beam": beam})
+	if is_active:
+		state_machine.transition_to("Firing", {"beam": beam})
 
 func physics_update(delta: float) -> void:
 	var new_transform = enemy.transform.looking_at(enemy.player.global_position)

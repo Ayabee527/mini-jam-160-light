@@ -7,7 +7,8 @@ func enter(msg:={}) -> void:
 		beam = msg["beam"]
 		
 		await beam.finished
-		state_machine.transition_to("Tracking")
+		if is_active:
+			state_machine.transition_to("Tracking")
 	else:
 		state_machine.transition_to("Tracking")
 
