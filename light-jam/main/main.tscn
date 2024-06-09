@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d06lpgmwoofe3"]
+[gd_scene load_steps=19 format=3 uid="uid://d06lpgmwoofe3"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_7ngl2"]
 [ext_resource type="PackedScene" uid="uid://c8nusbwukbtai" path="res://player/player.tscn" id="1_lis5i"]
@@ -6,11 +6,60 @@
 [ext_resource type="Texture2D" uid="uid://stdjrcf5evms" path="res://assets/textures/filled-square.png" id="2_hb6u5"]
 [ext_resource type="Script" path="res://main/wave_handler.gd" id="3_mky24"]
 [ext_resource type="PackedScene" uid="uid://c2xjk4egkc5gp" path="res://enemies/hookpoint/hook_point.tscn" id="4_3ae5r"]
+[ext_resource type="FontFile" uid="uid://bee8wfgvan2ip" path="res://assets/fonts/GravityBold8.ttf" id="4_hual4"]
 [ext_resource type="FontFile" uid="uid://bljrwpu30jvfs" path="res://assets/fonts/fibberish.ttf" id="4_n4vl6"]
 [ext_resource type="AudioStream" uid="uid://br2172fs1tt2w" path="res://assets/music/fly by the photons.ogg" id="5_wix6w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b55wx"]
 bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ub2y2"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2lnul"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0.25098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgwtu"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0.501961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tpku"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0.25098)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -28,10 +77,12 @@ normal = Vector2(-1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vno5j"]
 normal = Vector2(0, 1)
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "death_meter")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "death_meter", "retry_butt", "menu_butt")]
 script = ExtResource("1_7ngl2")
 player = NodePath("Player")
 death_meter = NodePath("CanvasLayer/BG/DeathMeter")
+retry_butt = NodePath("CanvasLayer/BG/MarginContainer/Retry")
+menu_butt = NodePath("CanvasLayer/BG/MarginContainer/Menu")
 
 [node name="ScoreHandler" type="Node" parent="." node_paths=PackedStringArray("player", "multiplier_label", "score_label")]
 script = ExtResource("2_aw503")
@@ -83,6 +134,37 @@ theme_override_font_sizes/font_size = 16
 text = "x1.00"
 horizontal_alignment = 1
 
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BG"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Retry" type="Button" parent="CanvasLayer/BG/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_hual4")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_ub2y2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2lnul")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qgwtu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3tpku")
+text = "RETRY"
+
+[node name="Menu" type="Button" parent="CanvasLayer/BG/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_hual4")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_ub2y2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2lnul")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qgwtu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3tpku")
+text = "Menu"
+
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="WallLeft" type="StaticBody2D" parent="Walls"]
@@ -130,8 +212,11 @@ script = ExtResource("3_mky24")
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_wix6w")
 volume_db = -5.0
+autoplay = true
 bus = &"music"
 
+[connection signal="pressed" from="CanvasLayer/BG/MarginContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="CanvasLayer/BG/MarginContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="burnt" from="Player" to="." method="_on_player_burnt"]
 [connection signal="burnt" from="Player" to="ScoreHandler" method="_on_player_burnt"]
 [connection signal="grappled" from="Player" to="ScoreHandler" method="_on_player_grappled"]

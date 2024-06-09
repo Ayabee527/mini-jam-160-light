@@ -11,7 +11,8 @@
 			"uuid": "9abb0949-8725-4ee3-b55c-6166d16d8f4c",
 			"title": "Todo",
 			"tasks": [
-				"3f01836a-4b97-4da7-adab-cfbd4233d694"
+				"3f01836a-4b97-4da7-adab-cfbd4233d694",
+				"6a247531-a62f-44a8-9cfd-697061206a32"
 			]
 		},
 		{
@@ -134,6 +135,13 @@
 		{
 			"uuid": "3f01836a-4b97-4da7-adab-cfbd4233d694",
 			"title": "Main Menu",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "6a247531-a62f-44a8-9cfd-697061206a32",
+			"title": "Tutorial",
 			"description": "",
 			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
 			"steps": []

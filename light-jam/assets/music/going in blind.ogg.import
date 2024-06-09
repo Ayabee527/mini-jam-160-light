@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d14wvhse0eylx"
+path="res://.godot/imported/going in blind.ogg-d07d14c639d11d1629b61eab5e6e3176.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/going in blind.ogg"
+dest_files=["res://.godot/imported/going in blind.ogg-d07d14c639d11d1629b61eab5e6e3176.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=90.0
+beat_count=0
+bar_beats=4

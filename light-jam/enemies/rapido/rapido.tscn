@@ -29,7 +29,7 @@ scale_curve = SubResource("CurveTexture_t3qi8")
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_v6yyu"]
+[sub_resource type="CurveTexture" id="CurveTexture_ovaew"]
 curve = SubResource("Curve_g16rv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x0888"]
@@ -40,7 +40,7 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.25
-scale_curve = SubResource("CurveTexture_v6yyu")
+scale_curve = SubResource("CurveTexture_ovaew")
 
 [sub_resource type="Curve" id="Curve_dd1po"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.253333, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

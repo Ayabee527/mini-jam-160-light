@@ -5,7 +5,7 @@ const STYLE_TEXT = preload("res://style_text/style_text.tscn")
 
 const STYLES = {
 	"SLINGSHOT": 100,
-	"CLEANSWEEP": 500,
+	"CLEANSWEEP": 100,
 	"SMASH": 50,
 	"COMBO": 50,
 	"COLLATERAL": 75,
@@ -94,7 +94,6 @@ func _on_wave_handler_enemy_killed(enemy: Node2D) -> void:
 	if grapple_target != null:
 		collateral = grapple_target.owner != enemy
 	
-	print(clicks_in_wave, ", ", last_kill_clicks, ", ", kill_combo)
 	if (clicks_in_wave == last_kill_clicks):
 		if kill_combo > 1:
 			trigger_style("COMBO x" + str(kill_combo + 1))
@@ -120,8 +119,8 @@ func _on_wave_handler_enemy_killed(enemy: Node2D) -> void:
 
 func _on_wave_handler_wave_cleared(size: int) -> void:
 	if not clicks_in_wave > 1:
-		if size >= 5:
-			trigger_style("CLEANSWEEP")
+		if size >= 4:
+			trigger_style("CLEANSWEEP x" + (str(size)))
 	clicks_in_wave = 0
 	last_kill_clicks = 0
 

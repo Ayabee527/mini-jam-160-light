@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c8nusbwukbtai"]
+[gd_scene load_steps=38 format=3 uid="uid://c8nusbwukbtai"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_lhvak"]
 [ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="2_kd5qd"]
@@ -96,6 +96,23 @@ scale_max = 8.0
 scale_curve = SubResource("CurveTexture_15mwb")
 color = Color(1, 1, 0, 1)
 
+[sub_resource type="Curve" id="Curve_cym0b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v6yyu"]
+curve = SubResource("Curve_cym0b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nm5d8"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_v6yyu")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_bv8kr"]
 radius = 16.0
 
@@ -141,7 +158,7 @@ streams_count = 1
 stream_0/stream = ExtResource("11_owmya")
 stream_0/weight = 1.0
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("shape", "fill", "burn_particles", "hook_sound", "latch_sound", "launch_sound", "buzz_sound", "bounce_sound") groups=["player"]]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("shape", "fill", "burn_particles", "death_particles", "trail_particles", "hook_sound", "latch_sound", "launch_sound", "buzz_sound", "bounce_sound") groups=["player"]]
 collision_layer = 6
 physics_material_override = SubResource("PhysicsMaterial_rsa7s")
 gravity_scale = 0.5
@@ -151,6 +168,8 @@ script = ExtResource("1_lhvak")
 shape = NodePath("Shape")
 fill = NodePath("Shape/Fill")
 burn_particles = NodePath("Burn")
+death_particles = NodePath("Death")
+trail_particles = NodePath("Trail")
 hook_sound = NodePath("Hook")
 latch_sound = NodePath("Latch")
 launch_sound = NodePath("Launch")
@@ -211,6 +230,15 @@ process_material = SubResource("ParticleProcessMaterial_qt1di")
 lifetime = 0.75
 one_shot = true
 explosiveness = 0.25
+randomness = 1.0
+
+[node name="Death" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_nm5d8")
+texture = ExtResource("2_kd5qd")
+one_shot = true
+explosiveness = 1.0
 randomness = 1.0
 
 [node name="GrappleLine" type="Line2D" parent="."]
@@ -296,6 +324,7 @@ max_polyphony = 5
 bus = &"sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="died" from="." to="StateMachine/Hook" method="_on_player_died"]
 [connection signal="timeout" from="StateMachine/Hook/LaunchWindow" to="StateMachine/Hook" method="_on_launch_window_timeout"]
 [connection signal="finished" from="LaunchParticles" to="StateMachine/Hook" method="_on_launch_particles_finished"]
 [connection signal="area_entered" from="GrappleHolder/HookDetect" to="GrappleHolder/HookDetect" method="_on_area_entered"]

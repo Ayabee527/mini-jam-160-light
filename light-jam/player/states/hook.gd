@@ -95,3 +95,9 @@ func _on_smasher_area_entered(area: Area2D) -> void:
 			if not in_grapple:
 				smasher.set_deferred("disabled", true)
 			state_machine.transition_to("Fall")
+
+
+func _on_player_died() -> void:
+	smasher.set_deferred("disabled", true)
+	light_detect.set_deferred("disabled", true)
+	state_machine.transition_to("Fall")
