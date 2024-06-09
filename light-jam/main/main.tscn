@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d06lpgmwoofe3"]
+[gd_scene load_steps=10 format=3 uid="uid://d06lpgmwoofe3"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_7ngl2"]
 [ext_resource type="PackedScene" uid="uid://c8nusbwukbtai" path="res://player/player.tscn" id="1_lis5i"]
 [ext_resource type="Script" path="res://main/wave_handler.gd" id="3_mky24"]
+[ext_resource type="PackedScene" uid="uid://c2xjk4egkc5gp" path="res://enemies/hookpoint/hook_point.tscn" id="4_3ae5r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b55wx"]
 bg_color = Color(0, 0, 0, 1)
@@ -63,6 +64,18 @@ shape = SubResource("WorldBoundaryShape2D_vno5j")
 
 [node name="Player" parent="." instance=ExtResource("1_lis5i")]
 position = Vector2(128, 128)
+
+[node name="HookPoint1" parent="." instance=ExtResource("4_3ae5r")]
+position = Vector2(128, 224)
+
+[node name="HookPoint2" parent="." instance=ExtResource("4_3ae5r")]
+position = Vector2(128, 32)
+
+[node name="HookPoint3" parent="." instance=ExtResource("4_3ae5r")]
+position = Vector2(224, 128)
+
+[node name="HookPoint4" parent="." instance=ExtResource("4_3ae5r")]
+position = Vector2(32, 128)
 
 [node name="WaveHandler" type="Node2D" parent="."]
 script = ExtResource("3_mky24")

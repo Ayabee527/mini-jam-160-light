@@ -30,7 +30,8 @@
 				"4a50bb89-a0ad-48cb-944d-fb76f8028443",
 				"1f5d974b-085c-4e8a-80c6-a5c368403cf3",
 				"904bec1a-a9bd-4eb7-b8c8-ea10383df76a",
-				"a4ed94da-8d27-47db-b771-125f2d494c54"
+				"a4ed94da-8d27-47db-b771-125f2d494c54",
+				"51fae809-6c34-4a4e-bfdb-ef27cdb699f8"
 			]
 		}
 	],
@@ -94,6 +95,13 @@
 		{
 			"uuid": "4a50bb89-a0ad-48cb-944d-fb76f8028443",
 			"title": "Wave Spawning",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "51fae809-6c34-4a4e-bfdb-ef27cdb699f8",
+			"title": "HookPoints",
 			"description": "",
 			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
 			"steps": []

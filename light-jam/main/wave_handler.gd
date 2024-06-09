@@ -11,7 +11,7 @@ const COSTS = {
 	"FLASHER": 2
 }
 
-@export var extra_spend: int = 16
+@export var extra_spend: int = 2
 
 var wave: int = 0
 

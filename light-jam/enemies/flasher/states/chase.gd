@@ -3,7 +3,7 @@ extends FlasherState
 const BEAM = preload("res://light_beam/light_beam.tscn")
 
 @export var chase_speed: float = 100.0
-@export var turn_speed: float = 2.5
+@export var turn_speed: float = 5.0
 @export var light_point: Marker2D
 @export var chase_sound: AudioStreamPlayer
 
@@ -14,8 +14,8 @@ func enter(_msg:={}) -> void:
 	
 	beam = BEAM.instantiate()
 	#beam.global_position = light_point.global_position
-	beam.charge_time = 4
-	beam.sustain_time = 4
+	beam.charge_time = 2
+	beam.sustain_time = 2
 	light_point.add_child(beam)
 	
 	await beam.fired

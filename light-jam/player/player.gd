@@ -63,4 +63,5 @@ func _on_body_entered(body: Node) -> void:
 
 
 func _on_smasher_area_entered(area: Area2D) -> void:
-	apply_central_impulse(linear_velocity.normalized() * 250.0)
+	pass
+	#apply_central_impulse(linear_velocity.normalized() * 250.0)

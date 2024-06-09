@@ -175,14 +175,14 @@ launch_particles = NodePath("../../LaunchParticles")
 launch_celebrate = NodePath("../../LaunchCelebrate")
 
 [node name="LaunchWindow" type="Timer" parent="StateMachine/Hook"]
-wait_time = 0.25
+wait_time = 0.1
 one_shot = true
 
 [node name="Trail" type="GPUParticles2D" parent="."]
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_cjb3d")
 texture = ExtResource("2_kd5qd")
-lifetime = 2.0
+lifetime = 0.5
 explosiveness = 0.1
 randomness = 1.0
 
@@ -207,6 +207,7 @@ randomness = 1.0
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_qt1di")
+lifetime = 0.75
 one_shot = true
 explosiveness = 0.25
 randomness = 1.0

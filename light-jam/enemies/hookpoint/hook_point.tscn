@@ -1,0 +1,486 @@
+[gd_scene load_steps=22 format=3 uid="uid://c2xjk4egkc5gp"]
+
+[ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="1_p86mv"]
+[ext_resource type="Script" path="res://enemies/hookpoint/hook_point.gd" id="1_vkfq4"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_a5auy"]
+[ext_resource type="Script" path="res://enemies/hookpoint/states/frozen.gd" id="3_hog4u"]
+[ext_resource type="Script" path="res://enemies/hookpoint/states/hover.gd" id="4_ex41f"]
+[ext_resource type="PackedScene" uid="uid://bw8338ilrtcwc" path="res://components/trail/trail.tscn" id="6_axop5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ndwp0"]
+bounce = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bi4m4"]
+particle_flag_disable_z = true
+spread = 15.0
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+damping_min = 50.0
+damping_max = 100.0
+scale_min = 0.01
+scale_max = 0.05
+
+[sub_resource type="Curve" id="Curve_pckvv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f5k6r"]
+curve = SubResource("Curve_pckvv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ktat"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_f5k6r")
+
+[sub_resource type="Curve" id="Curve_ev1r1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.253333, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6v40k"]
+curve = SubResource("Curve_ev1r1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r5ee7"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 8.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 8.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -25.0
+radial_accel_max = -25.0
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_6v40k")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gofpt"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ccim"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rpm3n"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_hiqs6"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/Thruster1/Thruster:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/Thruster2/Thruster:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/Thruster3/Thruster:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/Thruster4/Thruster:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SpawnDone:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Spawning:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shape:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_8u37s"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/Thruster1/Thruster:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/Thruster2/Thruster:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/Thruster3/Thruster:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/Thruster4/Thruster:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Death:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Shape:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Spawning:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jt0bs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/Thruster1/Thruster:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/Thruster2/Thruster:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/Thruster3/Thruster:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/Thruster4/Thruster:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SpawnDone:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Spawning:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shape:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Death:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvj4g"]
+_data = {
+"RESET": SubResource("Animation_jt0bs"),
+"die": SubResource("Animation_8u37s"),
+"spawn": SubResource("Animation_hiqs6")
+}
+
+[node name="HookPoint" type="RigidBody2D" node_paths=PackedStringArray("smash_detect", "grapple", "anim_player")]
+modulate = Color(0.752941, 0.752941, 0.752941, 1)
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_ndwp0")
+gravity_scale = 0.0
+constant_torque = 50.0
+script = ExtResource("1_vkfq4")
+smash_detect = NodePath("SmashDetect/CollisionShape2D")
+grapple = NodePath("Grapple/CollisionShape2D")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_a5auy")
+initial_state = NodePath("Frozen")
+
+[node name="Frozen" type="Node" parent="StateMachine" node_paths=PackedStringArray("respawn_timer")]
+script = ExtResource("3_hog4u")
+respawn_timer = NodePath("RespawnTimer")
+
+[node name="RespawnTimer" type="Timer" parent="StateMachine/Frozen"]
+one_shot = true
+
+[node name="Hover" type="Node" parent="StateMachine" node_paths=PackedStringArray("bap_timer")]
+script = ExtResource("4_ex41f")
+bap_timer = NodePath("BapTimer")
+
+[node name="BapTimer" type="Timer" parent="StateMachine/Hover"]
+wait_time = 1.5
+
+[node name="Thrusters" type="Node2D" parent="."]
+visible = false
+
+[node name="Thruster1" type="Marker2D" parent="Thrusters"]
+position = Vector2(-2, -2)
+rotation = -3.14159
+
+[node name="Thruster" type="GPUParticles2D" parent="Thrusters/Thruster1"]
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_bi4m4")
+texture = ExtResource("1_p86mv")
+
+[node name="Thruster2" type="Marker2D" parent="Thrusters"]
+position = Vector2(2, -2)
+rotation = -1.5708
+
+[node name="Thruster" type="GPUParticles2D" parent="Thrusters/Thruster2"]
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_bi4m4")
+texture = ExtResource("1_p86mv")
+
+[node name="Thruster3" type="Marker2D" parent="Thrusters"]
+position = Vector2(-2, 2)
+rotation = 1.5708
+
+[node name="Thruster" type="GPUParticles2D" parent="Thrusters/Thruster3"]
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_bi4m4")
+texture = ExtResource("1_p86mv")
+
+[node name="Thruster4" type="Marker2D" parent="Thrusters"]
+position = Vector2(2, 2)
+
+[node name="Thruster" type="GPUParticles2D" parent="Thrusters/Thruster4"]
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_bi4m4")
+texture = ExtResource("1_p86mv")
+
+[node name="SpawnDone" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_3ktat")
+texture = ExtResource("1_p86mv")
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="Death" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_3ktat")
+texture = ExtResource("1_p86mv")
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="Spawning" type="GPUParticles2D" parent="."]
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_r5ee7")
+texture = ExtResource("1_p86mv")
+randomness = 1.0
+
+[node name="Trail" parent="." instance=ExtResource("6_axop5")]
+length = 24
+
+[node name="Shape" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-6, 0, -2, -2, 0, -6, 2, -2, 6, 0, 2, 2, 0, 6, -2, 2)
+
+[node name="Fill" type="Polygon2D" parent="Shape"]
+visible = false
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-4, 0, -1, -1, 0, -4, 1, -1, 4, 0, 1, 1, 0, 4, -1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gofpt")
+
+[node name="Grapple" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple"]
+shape = SubResource("CircleShape2D_1ccim")
+disabled = true
+
+[node name="SmashDetect" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmashDetect"]
+shape = SubResource("CircleShape2D_rpm3n")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lvj4g")
+}
+autoplay = "spawn"
+
+[connection signal="timeout" from="StateMachine/Hover/BapTimer" to="StateMachine/Hover" method="_on_bap_timer_timeout"]
+[connection signal="area_entered" from="SmashDetect" to="." method="_on_smash_detect_area_entered"]
+[connection signal="area_entered" from="SmashDetect" to="StateMachine/Hover" method="_on_smash_detect_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Frozen" method="_on_animation_player_animation_finished"]
