@@ -23,5 +23,5 @@ func _on_smash_detect_area_entered(area: Area2D) -> void:
 
 func _on_bap_timer_timeout() -> void:
 	hook_point.apply_central_impulse(
-		Vector2.from_angle(TAU * randf()) * 50.0
+		Vector2.from_angle(TAU * randf()) * 10.0
 	)

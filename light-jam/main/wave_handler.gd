@@ -4,17 +4,20 @@ extends Node2D
 const FLASHER = preload("res://enemies/flasher/flasher.tscn")
 const RAPIDO = preload("res://enemies/rapido/rapido.tscn")
 const SPOOTLIGHT = preload("res://enemies/spotlight/spotlight.tscn")
+const SNIPER = preload("res://enemies/sniper/sniper.tscn")
 
 const ENEMIES = {
 	"FLASHER": FLASHER,
 	"RAPIDO": RAPIDO,
 	"SPOTLIGHT": SPOOTLIGHT,
+	"SNIPER": SNIPER,
 }
 
 const COSTS = {
 	"FLASHER": 2,
 	"RAPIDO": 6,
-	"SPOTLIGHT": 10
+	"SPOTLIGHT": 10,
+	"SNIPER": 10,
 }
 
 @export var extra_spend: int = 2

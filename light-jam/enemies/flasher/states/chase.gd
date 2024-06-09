@@ -14,7 +14,7 @@ func enter(_msg:={}) -> void:
 	
 	beam = BEAM.instantiate()
 	beam.start_width = 8.0
-	beam.end_width = 8.0
+	beam.end_width = 64.0
 	#beam.global_position = light_point.global_position
 	beam.charge_time = 2
 	beam.sustain_time = 2

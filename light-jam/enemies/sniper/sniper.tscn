@@ -1,23 +1,21 @@
-[gd_scene load_steps=22 format=3 uid="uid://dhnda1bljjww4"]
+[gd_scene load_steps=21 format=3 uid="uid://s2cgxfwe8c1o"]
 
-[ext_resource type="Script" path="res://enemies/spotlight/spotlight.gd" id="1_cdmc4"]
-[ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_fywhh"]
-[ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="2_qwb0k"]
-[ext_resource type="Script" path="res://enemies/spotlight/states/frozen.gd" id="3_g2lc6"]
-[ext_resource type="Script" path="res://enemies/spotlight/states/target.gd" id="4_jeywd"]
-[ext_resource type="AudioStream" uid="uid://hhisb63xkucx" path="res://assets/sounds/explode.wav" id="6_r5hmo"]
+[ext_resource type="Script" path="res://enemies/sniper/sniper.gd" id="1_8ixvf"]
+[ext_resource type="Texture2D" uid="uid://c4du15bkvui31" path="res://assets/textures/circle-filled.png" id="2_66nvd"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_mbn3c"]
+[ext_resource type="Script" path="res://enemies/sniper/states/frozen.gd" id="3_g1xcm"]
+[ext_resource type="AudioStream" uid="uid://hhisb63xkucx" path="res://assets/sounds/explode.wav" id="3_oradn"]
+[ext_resource type="Script" path="res://enemies/sniper/states/tracking.gd" id="4_myhqa"]
+[ext_resource type="Script" path="res://enemies/sniper/states/firing.gd" id="5_vxvg8"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lsgs2"]
-bounce = 0.5
-
-[sub_resource type="Curve" id="Curve_505so"]
+[sub_resource type="Curve" id="Curve_1457n"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_4v02j"]
-curve = SubResource("Curve_505so")
+[sub_resource type="CurveTexture" id="CurveTexture_fbvbe"]
+curve = SubResource("Curve_1457n")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iglpg"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bgjdf"]
 particle_flag_disable_z = true
 spread = 180.0
 initial_velocity_min = 100.0
@@ -25,16 +23,16 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.25
-scale_curve = SubResource("CurveTexture_4v02j")
+scale_curve = SubResource("CurveTexture_fbvbe")
 
-[sub_resource type="Curve" id="Curve_idw86"]
+[sub_resource type="Curve" id="Curve_u6px3"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.253333, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_g7wn8"]
-curve = SubResource("Curve_idw86")
+[sub_resource type="CurveTexture" id="CurveTexture_5tlvs"]
+curve = SubResource("Curve_u6px3")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wviav"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2wkf2"]
 particle_flag_disable_z = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
@@ -46,18 +44,20 @@ radial_accel_min = -50.0
 radial_accel_max = -50.0
 scale_min = 0.1
 scale_max = 0.2
-scale_curve = SubResource("CurveTexture_g7wn8")
+scale_curve = SubResource("CurveTexture_5tlvs")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8ihn5"]
-radius = 12.0416
+[sub_resource type="CircleShape2D" id="CircleShape2D_j8ldf"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oemlu"]
-radius = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_o1uey"]
+radius = 13.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7117w"]
-radius = 16.0
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qrpf4"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("3_oradn")
+stream_0/weight = 1.0
 
-[sub_resource type="Animation" id="Animation_5ww86"]
+[sub_resource type="Animation" id="Animation_iyxa5"]
 resource_name = "spawn"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -96,34 +96,46 @@ tracks/2/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_pjg2p"]
+[sub_resource type="Animation" id="Animation_844nj"]
 resource_name = "die"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Shape:visible")
+tracks/0/path = NodePath("Death:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Death:emitting")
+tracks/1/path = NodePath("Spawning:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shape:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_hdsel"]
+[sub_resource type="Animation" id="Animation_5axj3"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -174,45 +186,43 @@ tracks/3/keys = {
 "values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0w63o"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_77coi"]
 _data = {
-"RESET": SubResource("Animation_hdsel"),
-"die": SubResource("Animation_pjg2p"),
-"spawn": SubResource("Animation_5ww86")
+"RESET": SubResource("Animation_5axj3"),
+"die": SubResource("Animation_844nj"),
+"spawn": SubResource("Animation_iyxa5")
 }
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nquan"]
-random_pitch = 1.2
-streams_count = 1
-stream_0/stream = ExtResource("6_r5hmo")
-stream_0/weight = 1.0
-
-[node name="Spotlight" type="RigidBody2D" node_paths=PackedStringArray("smash_detect", "grapple", "anim_player", "die_sound")]
-collision_layer = 2
-physics_material_override = SubResource("PhysicsMaterial_lsgs2")
+[node name="Sniper" type="RigidBody2D" node_paths=PackedStringArray("smash_detect", "grapple", "anim_player", "die_sound")]
+collision_layer = 0
+collision_mask = 0
 gravity_scale = 0.0
-script = ExtResource("1_cdmc4")
+script = ExtResource("1_8ixvf")
 smash_detect = NodePath("SmashDetect/CollisionShape2D")
 grapple = NodePath("Grapple/CollisionShape2D")
 anim_player = NodePath("AnimationPlayer")
 die_sound = NodePath("Die")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_fywhh")
+script = ExtResource("2_mbn3c")
 initial_state = NodePath("Frozen")
 
 [node name="Frozen" type="Node" parent="StateMachine"]
-script = ExtResource("3_g2lc6")
+script = ExtResource("3_g1xcm")
 
-[node name="Target" type="Node" parent="StateMachine" node_paths=PackedStringArray("beam_holder")]
-script = ExtResource("4_jeywd")
+[node name="Tracking" type="Node" parent="StateMachine" node_paths=PackedStringArray("barrel", "beam_holder")]
+script = ExtResource("4_myhqa")
+barrel = NodePath("../../Shape/Barrel")
 beam_holder = NodePath("../../BeamHolder")
+
+[node name="Firing" type="Node" parent="StateMachine"]
+script = ExtResource("5_vxvg8")
 
 [node name="SpawnDone" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 10
-process_material = SubResource("ParticleProcessMaterial_iglpg")
-texture = ExtResource("2_qwb0k")
+process_material = SubResource("ParticleProcessMaterial_bgjdf")
+texture = ExtResource("2_66nvd")
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
@@ -220,8 +230,8 @@ randomness = 1.0
 [node name="Death" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 100
-process_material = SubResource("ParticleProcessMaterial_iglpg")
-texture = ExtResource("2_qwb0k")
+process_material = SubResource("ParticleProcessMaterial_bgjdf")
+texture = ExtResource("2_66nvd")
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
@@ -229,29 +239,29 @@ randomness = 1.0
 [node name="Spawning" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 10
-process_material = SubResource("ParticleProcessMaterial_wviav")
-texture = ExtResource("2_qwb0k")
+process_material = SubResource("ParticleProcessMaterial_2wkf2")
+texture = ExtResource("2_66nvd")
 randomness = 1.0
 
 [node name="Shape" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -12, -12, 0, 0, 12, 4, 8, 12, 8, 8, 4, 10, 0, 8, -4, 12, -8, 4, -8)
+polygon = PackedVector2Array(0, 8, -6, 6, -8, 0, -6, -6, 0, -8, 6, -6, 8, 0, 6, 6)
+
+[node name="Barrel" type="Polygon2D" parent="Shape"]
+polygon = PackedVector2Array(0, -4, 14, -1, 14, 1, 0, 4)
 
 [node name="Fill" type="Polygon2D" parent="Shape"]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, -8, -8, 0, 0, 8, 8, 0)
+polygon = PackedVector2Array(0, 6, -4, 4, -6, 0, -4, -4, 0, -6, 4, -4, 6, 0, 4, 4)
 
 [node name="BeamHolder" type="Marker2D" parent="."]
-position = Vector2(10, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_8ihn5")
+position = Vector2(13, 0)
 
 [node name="Grapple" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple"]
-shape = SubResource("CircleShape2D_oemlu")
+shape = SubResource("CircleShape2D_j8ldf")
 disabled = true
 
 [node name="SmashDetect" type="Area2D" parent="."]
@@ -259,20 +269,21 @@ collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmashDetect"]
-shape = SubResource("CircleShape2D_7117w")
+shape = SubResource("CircleShape2D_o1uey")
 disabled = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_0w63o")
-}
-autoplay = "spawn"
-
 [node name="Die" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_nquan")
+stream = SubResource("AudioStreamRandomizer_qrpf4")
 volume_db = -10.0
 bus = &"sfx"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_77coi")
+}
+autoplay = "spawn"
+
 [connection signal="area_entered" from="SmashDetect" to="." method="_on_smash_detect_area_entered"]
-[connection signal="area_entered" from="SmashDetect" to="StateMachine/Target" method="_on_smash_detect_area_entered"]
+[connection signal="area_entered" from="SmashDetect" to="StateMachine/Tracking" method="_on_smash_detect_area_entered"]
+[connection signal="area_entered" from="SmashDetect" to="StateMachine/Firing" method="_on_smash_detect_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Frozen" method="_on_animation_player_animation_finished"]

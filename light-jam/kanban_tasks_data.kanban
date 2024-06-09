@@ -19,14 +19,14 @@
 		{
 			"uuid": "4ee7b101-230c-4334-8806-9bc4f463b0f7",
 			"title": "Doing",
-			"tasks": [
-				"c5679710-6825-485d-b2d8-1c9a95f2ee86"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "24b3160e-ae78-4f72-b617-c55485ed9a6c",
 			"title": "Done",
 			"tasks": [
+				"e13379e4-8329-4178-99ee-ab28bef2cc4f",
+				"c5679710-6825-485d-b2d8-1c9a95f2ee86",
 				"ffb3e5c9-0047-43e1-8021-f3b3b4d497f6",
 				"f2053f8b-1595-48a5-9ea0-eca4ef146966",
 				"4a50bb89-a0ad-48cb-944d-fb76f8028443",
@@ -118,6 +118,13 @@
 		{
 			"uuid": "c5679710-6825-485d-b2d8-1c9a95f2ee86",
 			"title": "Another More Enemies",
+			"description": "",
+			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
+			"steps": []
+		},
+		{
+			"uuid": "e13379e4-8329-4178-99ee-ab28bef2cc4f",
+			"title": "Another Another More Enemies",
 			"description": "",
 			"category": "606a6c2b-7d19-4b83-9c84-b8469c2d1053",
 			"steps": []
