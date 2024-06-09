@@ -325,6 +325,7 @@ bus = &"sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="died" from="." to="StateMachine/Hook" method="_on_player_died"]
+[connection signal="died" from="." to="GrappleHolder/HookDetect" method="_on_player_died"]
 [connection signal="timeout" from="StateMachine/Hook/LaunchWindow" to="StateMachine/Hook" method="_on_launch_window_timeout"]
 [connection signal="finished" from="LaunchParticles" to="StateMachine/Hook" method="_on_launch_particles_finished"]
 [connection signal="area_entered" from="GrappleHolder/HookDetect" to="GrappleHolder/HookDetect" method="_on_area_entered"]

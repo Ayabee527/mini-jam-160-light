@@ -7,6 +7,9 @@ signal game_ended()
 
 @export var retry_butt: Button
 @export var menu_butt: Button
+@export var gameover_label: RichTextLabel
+@export var multiplier_label: Label
+@export var mouse_info: RichTextLabel
 
 var death_value: float = 0.0
 
@@ -47,6 +50,8 @@ func game_over() -> void:
 	await get_tree().create_timer(1.0, false).timeout
 	retry_butt.show()
 	menu_butt.show()
+	gameover_label.show()
+	multiplier_label.hide()
 
 func _on_player_burnt() -> void:
 	burning = true
@@ -58,6 +63,8 @@ func _on_player_unburnt() -> void:
 
 func _on_wave_handler_enemy_killed(enemy: Node2D) -> void:
 	death_value -= 5.0
+	if mouse_info.visible:
+		mouse_info.hide()
 
 
 func _on_retry_pressed() -> void:
@@ -65,4 +72,4 @@ func _on_retry_pressed() -> void:
 
 
 func _on_menu_pressed() -> void:
-	pass # Replace with function body.
+	SceneSwitcher.switch_to("res://main_menu/main_menu.tscn")

@@ -10,6 +10,8 @@ var sine: float = 0.0
 
 var targeted_grapple: Area2D
 
+var player_dead: bool = false
+
 func _process(delta: float) -> void:
 	global_position = get_global_mouse_position()
 	grapple_highlight.global_rotation_degrees += 180.0 * delta
@@ -33,18 +35,27 @@ func update_highlight() -> void:
 	targeted_grapple = closest
 
 func _on_area_entered(area: Area2D) -> void:
-	if not grapple_points.has(area):
-		grapple_points.append(area)
-		update_highlight()
-		grapple_highlight.show()
+	if not player.dead:
+		if not grapple_points.has(area):
+			grapple_points.append(area)
+			update_highlight()
+			grapple_highlight.show()
 
 
 func _on_area_exited(area: Area2D) -> void:
-	if grapple_points.has(area):
-		grapple_points.erase(area)
+	if not player.dead:
+		if grapple_points.has(area):
+			grapple_points.erase(area)
+		
+		if grapple_points.size() > 0:
+			update_highlight()
+		else:
+			targeted_grapple = null
+			grapple_highlight.hide()
+
+
+func _on_player_died() -> void:
+	player_dead = true
 	
-	if grapple_points.size() > 0:
-		update_highlight()
-	else:
-		targeted_grapple = null
-		grapple_highlight.hide()
+	targeted_grapple = null
+	grapple_highlight.hide()

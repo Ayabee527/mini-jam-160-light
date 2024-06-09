@@ -15,7 +15,7 @@ const STYLES = {
 @export var player: Player
 
 @export var multiplier_label: Label
-@export var score_label: Label
+@export var score_label: RichTextLabel
 
 var speed_multiplier: float = 1.0
 var score: int = 0:
@@ -76,7 +76,8 @@ func set_score(new_score: int = 0) -> void:
 	last_score = score
 
 func increment_score(new_score: int):
-	score_label.text = str(new_score)
+	score_label.text = "[shake][center]"
+	score_label.text += str(new_score)
 
 
 func _on_wave_handler_enemy_killed(enemy: Node2D) -> void:

@@ -77,12 +77,15 @@ normal = Vector2(-1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vno5j"]
 normal = Vector2(0, 1)
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "death_meter", "retry_butt", "menu_butt")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "death_meter", "retry_butt", "menu_butt", "gameover_label", "multiplier_label", "mouse_info")]
 script = ExtResource("1_7ngl2")
 player = NodePath("Player")
 death_meter = NodePath("CanvasLayer/BG/DeathMeter")
 retry_butt = NodePath("CanvasLayer/BG/MarginContainer/Retry")
 menu_butt = NodePath("CanvasLayer/BG/MarginContainer/Menu")
+gameover_label = NodePath("CanvasLayer/BG/CenterContainer/VBoxContainer/GameOver")
+multiplier_label = NodePath("CanvasLayer/BG/CenterContainer/VBoxContainer/Multiplier")
+mouse_info = NodePath("CanvasLayer/BG/CenterContainer/VBoxContainer/Mouse")
 
 [node name="ScoreHandler" type="Node" parent="." node_paths=PackedStringArray("player", "multiplier_label", "score_label")]
 script = ExtResource("2_aw503")
@@ -116,16 +119,42 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="Score" type="Label" parent="CanvasLayer/BG/CenterContainer/VBoxContainer"]
+[node name="Mouse" type="RichTextLabel" parent="CanvasLayer/BG/CenterContainer/VBoxContainer"]
+clip_contents = false
 layout_mode = 2
-theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/normal_font = ExtResource("4_n4vl6")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[wave][center]USE YOUR MOUSE!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="GameOver" type="RichTextLabel" parent="CanvasLayer/BG/CenterContainer/VBoxContainer"]
+visible = false
+clip_contents = false
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_n4vl6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[shake rate=10 level=16][center]GAME OVER"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer/BG/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.501961, 0.501961, 0.501961, 1)
 theme_override_colors/font_shadow_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("4_n4vl6")
-theme_override_font_sizes/font_size = 64
-text = "0"
-horizontal_alignment = 1
+theme_override_fonts/normal_font = ExtResource("4_n4vl6")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[shake][center]0"
+fit_content = true
+autowrap_mode = 0
 
 [node name="Multiplier" type="Label" parent="CanvasLayer/BG/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -142,6 +171,7 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
 [node name="Retry" type="Button" parent="CanvasLayer/BG/MarginContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -154,6 +184,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_3tpku")
 text = "RETRY"
 
 [node name="Menu" type="Button" parent="CanvasLayer/BG/MarginContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4

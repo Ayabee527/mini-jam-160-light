@@ -15,7 +15,16 @@ var player: Player
 
 func _ready() -> void:
 	global_rotation = 0
-	global_position.y = 256
+	var rand = randi() % 4
+	match rand:
+		0:
+			global_position.y = 256
+		1:
+			global_position.y = 0
+		2:
+			global_position.x = 256
+		3:
+			global_position.x = 0
 	player = get_tree().get_first_node_in_group("player")
 
 func _on_smash_detect_area_entered(area: Area2D) -> void:

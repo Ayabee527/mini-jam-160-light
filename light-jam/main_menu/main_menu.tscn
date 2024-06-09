@@ -1,0 +1,188 @@
+[gd_scene load_steps=13 format=3 uid="uid://cqlklobip47fn"]
+
+[ext_resource type="FontFile" uid="uid://bee8wfgvan2ip" path="res://assets/fonts/GravityBold8.ttf" id="1_lm6st"]
+[ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_nhdx5"]
+[ext_resource type="AudioStream" uid="uid://d14wvhse0eylx" path="res://assets/music/going in blind.ogg" id="2_xnux7"]
+[ext_resource type="PackedScene" uid="uid://cp72ycqtggt2k" path="res://light_beam/light_beam.tscn" id="3_06mp7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_brlxu"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_172xj"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wj7e7"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0.25098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k5ne5"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0.501961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ms75i"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0.25098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_jlgh8"]
+resource_name = "scroll"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightBeam:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -512), Vector2(0, 1024)]
+}
+
+[sub_resource type="Animation" id="Animation_7jvil"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightBeam:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -128)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k6ji2"]
+_data = {
+"RESET": SubResource("Animation_7jvil"),
+"scroll": SubResource("Animation_jlgh8")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nhdx5")
+
+[node name="BG" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_brlxu")
+
+[node name="CenterContainer" type="CenterContainer" parent="BG"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BG/CenterContainer"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="BG/CenterContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_constants/line_separation = 8
+theme_override_fonts/normal_font = ExtResource("1_lm6st")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[shake][center]Photonic
+Boom"
+fit_content = true
+autowrap_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BG/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BG/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 8
+
+[node name="Play" type="Button" parent="BG/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_lm6st")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_172xj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wj7e7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k5ne5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ms75i")
+text = "PLAY"
+
+[node name="Quit" type="Button" parent="BG/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_lm6st")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_172xj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wj7e7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k5ne5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ms75i")
+text = "QUIT"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xnux7")
+autoplay = true
+bus = &"music"
+
+[node name="LightBeam" parent="." instance=ExtResource("3_06mp7")]
+position = Vector2(0, -128)
+length = 256.0
+charge_time = 0.1
+sustain_time = 600.0
+start_width = 512.0
+end_width = 512.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k6ji2")
+}
+autoplay = "scroll"
+
+[connection signal="pressed" from="BG/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="BG/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
