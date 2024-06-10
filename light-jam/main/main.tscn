@@ -160,6 +160,7 @@ autowrap_mode = 0
 
 [node name="Score" type="RichTextLabel" parent="CanvasLayer/BG/CenterContainer/VBoxContainer"]
 visible = false
+clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.501961, 0.501961, 0.501961, 1)
 theme_override_colors/font_shadow_color = Color(0.25098, 0.25098, 0.25098, 1)
@@ -212,6 +213,27 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_2lnul")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qgwtu")
 theme_override_styles/focus = SubResource("StyleBoxFlat_3tpku")
 text = "Menu"
+
+[node name="TITLECARD" type="RichTextLabel" parent="CanvasLayer/BG"]
+visible = false
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/line_separation = 8
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("4_hual4")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave][center]Photonic
+BOOM"
+fit_content = true
+autowrap_mode = 0
 
 [node name="Walls" type="Node2D" parent="."]
 
